@@ -1,1 +1,120 @@
-﻿
+﻿@using HousePlans.Areas.Administration.Models.Plan
+@using HousePlans.Areas.Administration.Models.Enums
+
+@model PlanFormViewModel
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+<div class="container-fluid">
+    <div class="row justify-content-center ">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            <div class="text-center">
+                <form>
+                    <div id="project">
+                        <h2>Add Project</h2>
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Adventure time" />
+                            <span asp-validation-for="Name" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price"></label>
+                            <input asp-for="Price" type="number" class="form-control" placeholder="Enter project price">
+                            <span asp-validation-for="Price" class="small text-danger"></span>
+                        </div>
+                    </div>
+                    <div id ="house">
+                        <h2>House</h2>
+                        <div class="form-group">
+                            <label asp-for="House.Area"></label>
+                            <input asp-for="House.Area" type="number" class="form-control" placeholder="Enter house area">
+                            <span asp-validation-for="House.Area" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.BuiltUpArea"></label>
+                            <input asp-for="House.BuiltUpArea" type="number" class="form-control" placeholder="Enter build up area">
+                            <span asp-validation-for="House.BuiltUpArea" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.StepOfTheBuilding"></label>
+                            <input asp-for="House.StepOfTheBuilding" type="number" class="form-control" placeholder="Enter step of the building">
+                            <span asp-validation-for="House.StepOfTheBuilding" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.LengthOfThePlot"></label>
+                            <input asp-for="House.LengthOfThePlot" type="number" class="form-control" placeholder="Enter length of the plot">
+                            <span asp-validation-for="House.LengthOfThePlot" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.WidthOfThePlot"></label>
+                            <input asp-for="House.WidthOfThePlot" type="number" class="form-control" placeholder="Enter width of the plot">
+                            <span asp-validation-for="House.WidthOfThePlot" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.Type" class="control-label"></label>
+                            <select asp-for="House.Type" class="form-control" asp-items="Html.GetEnumSelectList<HouseTypeFormViewModel>()">
+                                <option>Select type...</option>
+                            </select>
+                            <span asp-validation-for="House.Type" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.Style" class="control-label"></label>
+                            <select asp-for="House.Style" class="form-control" asp-items="Html.GetEnumSelectList<StyleFormViewModel>()">
+                                <option>Select style...</option>
+                            </select>
+                            <span asp-validation-for="House.Style" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.Roof" class="control-label"></label>
+                            <select asp-for="House.Roof" class="form-control" asp-items="Html.GetEnumSelectList<RoofFormVIewModel>()">
+                                <option>Select roof type...</option>
+                            </select>
+                            <span asp-validation-for="House.Roof" class="small text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="House.Garage" class="control-label"></label>
+                            <select asp-for="House.Garage" class="form-control" asp-items="Html.GetEnumSelectList<GarageFromViewModel>()">
+                                <option>Select garage type...</option>
+                            </select>
+                            <span asp-validation-for="House.Garage" class="small text-danger"></span>
+                        </div>
+                    </div>
+                    <div id="floors">
+                        <h2>Floors</h2>
+                        <div class="form-group">
+                            <label asp-for="House.Floors.Number"></label>
+                            <input asp-for="House.Floors.Number" type="number" onchange="addFields()" id="formNumber" class="form-control" placeholder="Enter floors number">
+                            <span asp-validation-for="House.Floors.Number" class="small text-danger"></span>
+                        </div>
+                        <div id="rooms">
+                            <h2>Rooms</h2>
+                            <div class="form-group">
+                                <label asp-for="House.Floors.Rooms.Name"></label>
+                                <input asp-for="House.Floors.Rooms.Name" class="form-control" placeholder="Enter room name">
+                                <span asp-validation-for="House.Floors.Rooms.Name" class="small text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="House.Floors.Rooms.Area"></label>
+                                <input asp-for="House.Floors.Rooms.Area" type="number" class="form-control" placeholder="Enter room area">
+                                <span asp-validation-for="House.Floors.Rooms.Area" class="small text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="instalation">
+                        <h2>Instalations</h2>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>

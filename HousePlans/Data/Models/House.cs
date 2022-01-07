@@ -2,6 +2,12 @@
 {
     public class House: BaseModel<int>
     {
+        public House()
+        {
+            this.Floors = new HashSet<Floor>();
+            this.Photos = new HashSet<Photo>();
+        }
+
         public HouseType Type { get; set; }
 
         public double Area { get; set; }
@@ -21,6 +27,8 @@
         public Garage Garage { get; set; }
 
         public Roof Roof { get; set; }
+        
+        public Style Style { get; set; }
 
         public bool PassiveHouse { get; set; }
     }

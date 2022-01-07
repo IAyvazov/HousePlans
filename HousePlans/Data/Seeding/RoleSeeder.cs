@@ -26,32 +26,28 @@
             if (role == null)
             {
                 var newRole = new IdentityRole(roleName);
-                var result = await roleManager.CreateAsync(newRole);
-                if (!result.Succeeded)
+                var roleResult = await roleManager.CreateAsync(newRole);
+                if (!roleResult.Succeeded)
                 {
-                    throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+                    throw new Exception(string.Join(Environment.NewLine, roleResult.Errors.Select(e => e.Description)));
                 }
 
                 var user = new IdentityUser
                 {
                     Email = "admin@admin.com",
-                    UserName = "admin",
+                    UserName = "admin@admin.com",
                 };
 
                 dbContext.Users.Add(user);
 
                 var adminPassword = "Admin123/";
 
-                await userManager.CreateAsync(user, adminPassword);
-
-
-                var userRoles = new IdentityUserRole<string>
+                var userResult = await userManager.CreateAsync(user, adminPassword);
+               
+                if (userResult.Succeeded)
                 {
-                    UserId = user.Id,
-                    RoleId = newRole.Id,
-                };
-
-                dbContext.UserRoles.Add(userRoles);
+                    await userManager.AddToRoleAsync(user, AdministratorRoleName);
+                }
             }
         }
     }

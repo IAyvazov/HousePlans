@@ -5,8 +5,8 @@
 
     using static GlobalConstant;
 
-    [Authorize(Roles = AdministratorRoleName)]
     [Area("Administration")]
+    [Authorize(Roles = AdministratorRoleName)]
     public abstract class AdministrationController : Controller
     {
     }
