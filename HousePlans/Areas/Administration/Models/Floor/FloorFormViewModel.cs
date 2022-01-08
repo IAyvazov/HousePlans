@@ -5,11 +5,18 @@
 
     public class FloorFormViewModel
     {
+        public FloorFormViewModel()
+        {
+            this.Rooms = new HashSet<RoomFormViewModel>();
+        }
+
         [DataType(DataType.Text)]
         [Display(Name = "Floor Numbers")]
         [Range(0, int.MaxValue)]
         public int Number { get; set; }
 
-        public RoomFormViewModel Rooms { get; set; }
+        public int NumberOfRooms { get; set; }
+
+        public HashSet<RoomFormViewModel> Rooms { get; set; }
     }
 }

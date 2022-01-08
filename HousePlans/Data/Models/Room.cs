@@ -8,5 +8,9 @@
         public string Name { get; set; }
 
         public double Area { get; set; }
+
+        public int FloorId { get; set; }
+
+        public Floor Floor { get; set; }
     }
 }

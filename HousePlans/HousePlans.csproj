@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Models\Instalation\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace HousePlans.Data.Models
+﻿namespace HousePlans.Data.Models.Enums
 {
     public enum HouseType
     {

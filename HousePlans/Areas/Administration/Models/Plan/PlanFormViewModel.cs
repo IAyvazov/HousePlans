@@ -5,7 +5,7 @@
 
     using static GlobalConstant;
 
-    public class PlanFormViewModel
+    public class PlanFormViewModel 
     {
         [Required]
         [DataType(DataType.Text)]

@@ -3,44 +3,95 @@
 
 // Write your JavaScript code.
 
-
 function addFields() {
 
-    var number = this.getElementById("formNumber").value;
-    var floorContainer = this.getElementById("floors");
-    var roomContainer = this.getElementById("rooms");
+    var number = +document.getElementById("numberOfFloors").value;
 
-    //while (container.hasChildNodes()) {
-    //    container.removeChild(container.lastChild);
-    //}
+    var floors = document.getElementById("floors");
 
-    for (i = 0; i < number; i++) {
+    for (var i = 0; i < number; i++) {
 
-        roomContainer.appendChild(document.createElement("p").textContent = "Floor number " + (i + 1));
-        floorContainer.appendChild(roomContainer);
+        var h2 = document.createElement("h2");
+        h2.textContent = "Floor " + i;
 
-        //var div = document.createElement("div");
-        //var label = document.createElement("label");
-        //var input = document.createElement("input"); 
-        //var span = document.createElement("span");
+        var div = document.createElement("div");
+        div.setAttribute("class", "form-group");
 
-        //div.setAttribute("class", "form-group");
+        var labelNumber = document.createElement("label");
+        labelNumber.setAttribute("name", `House.Floors[${i}].NumberOfRooms`);
+        labelNumber.setAttribute("class", "control-label");
+        labelNumber.textContent = "Number of rooms";
 
-        //label.setAttribute("asp-for", "House.Floors.Rooms.Name");
+        var inputNumber = document.createElement("input");
+        inputNumber.setAttribute("name", `House.Floors[${i}].NumberOfRooms`);
+        inputNumber.setAttribute("id", "numberOfRooms");
+        inputNumber.setAttribute("type", "number");
+        inputNumber.setAttribute("class", "form-control");
+        inputNumber.addEventListener("change", addRoomFields);
 
-        //input.setAttribute("asp-for", "House.Floors.Rooms.Name"); 
-        //input.setAttribute("class", "form-control"); 
-        //input.setAttribute("placeholder", "Enter room name"); 
+        var divRooms = document.createElement("div");
+        divRooms.setAttribute("id", `room${i}`);
+        divRooms.setAttribute("class", "form-group");
 
-        //span.setAttribute("asp-validation-for", "House.Floors.Rooms.Name"); 
-        //span.setAttribute("class", "small text-danger"); 
+        div.appendChild(h2);
+        div.appendChild(labelNumber);
+        div.appendChild(inputNumber);
 
-        //div.appendChild(label);
-        //div.appendChild(input);
-        //div.appendChild(span);
-
-        //container.appendChild(div); 
+        floors.appendChild(div);
+        floors.appendChild(divRooms);
     }
 }
 
+function addRoomFields(e) {
 
+    var number = +e.currentTarget.value;
+
+    var rooms = e.target.parentNode.nextSibling;
+
+    var floorNumber = +rooms.id.replace("room", "");;
+
+    for (var i = 0; i < number; i++) {
+
+
+        var h2 = document.createElement("h2");
+        h2.textContent = "Room " + (i+1);
+
+        var divName = document.createElement("div");
+        divName.setAttribute("class", "form-group");
+
+        var divArea = document.createElement("div");
+        divArea.setAttribute("class", "form-group");
+
+        var labelName = document.createElement("label");
+        labelName.setAttribute("class", "control-label");
+        labelName.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Name`);
+        labelName.textContent = "Room Name";
+
+        var inputName = document.createElement("input");
+        inputName.setAttribute("type", "text");
+        inputName.setAttribute("class", "form-control");
+        inputName.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Name`);
+
+
+        var labelArea = document.createElement("label");
+        labelArea.setAttribute("class", "control-label");
+        labelArea.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Area`);
+        labelArea.textContent = "Room Area";
+
+        var inputArea = document.createElement("input");
+        inputArea.setAttribute("type", "number");
+        inputArea.setAttribute("class", "form-control");
+        inputArea.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Area`);
+
+        
+        divName.appendChild(labelName);
+        divName.appendChild(inputName);
+
+        divArea.appendChild(labelArea);
+        divArea.appendChild(inputArea);
+
+        rooms.appendChild(h2);
+        rooms.appendChild(divName);
+        rooms.appendChild(divArea);
+    }
+}

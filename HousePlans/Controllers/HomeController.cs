@@ -13,6 +13,7 @@
             _logger = logger;
         }
 
+        [HttpGet("/")]
         public IActionResult Index()
         {
             return View();

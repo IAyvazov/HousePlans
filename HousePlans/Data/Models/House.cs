@@ -1,6 +1,8 @@
 ﻿namespace HousePlans.Data.Models
 {
-    public class House: BaseModel<int>
+    using HousePlans.Data.Models.Enums;
+
+    public class House : BaseModel<int>
     {
         public House()
         {
@@ -27,7 +29,7 @@
         public Garage Garage { get; set; }
 
         public Roof Roof { get; set; }
-        
+
         public Style Style { get; set; }
 
         public bool PassiveHouse { get; set; }

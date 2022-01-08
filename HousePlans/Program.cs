@@ -1,3 +1,4 @@
+using HousePlans.Areas.Administration.Services.Plan;
 using HousePlans.Data;
 using HousePlans.Data.Seeding;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IPlanService, PlanService>();
 
 var app = builder.Build();
 

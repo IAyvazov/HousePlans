@@ -7,6 +7,11 @@
 
     public class HouseFormVIewModel
     {
+        public HouseFormVIewModel()
+        {
+            this.Floors = new HashSet<FloorFormViewModel>();
+        }
+
         [DataType(DataType.Text)]
         [Display(Name = "Area")]
         [Range(0, int.MaxValue)]
@@ -43,8 +48,10 @@
 
         public StyleFormViewModel Style { get; set; }
 
-        public FloorFormViewModel Floors { get; set; }
+        public int NumberOfFloors { get; set; } = 0;
 
-        public PhotoFormViewModel Photos { get; set; }
+        public HashSet<FloorFormViewModel> Floors { get; set; }
+
+        //public PhotoFormViewModel Photos { get; set; }
     }
 }
