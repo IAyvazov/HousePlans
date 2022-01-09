@@ -1,6 +1,7 @@
 using HousePlans.Areas.Administration.Services.Floor;
 using HousePlans.Areas.Administration.Services.House;
 using HousePlans.Areas.Administration.Services.Instalation;
+using HousePlans.Areas.Administration.Services.Photo;
 using HousePlans.Areas.Administration.Services.Plan;
 using HousePlans.Areas.Administration.Services.Room;
 using HousePlans.Data;
@@ -25,6 +26,7 @@ builder.Services.AddTransient<IRoomService, RoomService>();
 builder.Services.AddTransient<IFloorService, FloorService>();
 builder.Services.AddTransient<IHouseService, HouseService>();
 builder.Services.AddTransient<IInstalationService, InstalationService>();
+builder.Services.AddTransient<IPhotoService, PhotoService>();
 
 var app = builder.Build();
 

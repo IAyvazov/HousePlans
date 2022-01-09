@@ -26,6 +26,7 @@ function addFields() {
         inputNumber.setAttribute("name", `House.Floors[${i}].NumberOfRooms`);
         inputNumber.setAttribute("id", "numberOfRooms");
         inputNumber.setAttribute("type", "number");
+        inputNumber.setAttribute("step", "0.01");
         inputNumber.setAttribute("class", "form-control");
         inputNumber.addEventListener("change", addRoomFields);
 
@@ -80,6 +81,7 @@ function addRoomFields(e) {
 
         var inputArea = document.createElement("input");
         inputArea.setAttribute("type", "number");
+        inputArea.setAttribute("step", "0.01");
         inputArea.setAttribute("class", "form-control");
         inputArea.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Area`);
 

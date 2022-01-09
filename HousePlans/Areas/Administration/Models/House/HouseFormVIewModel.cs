@@ -55,6 +55,6 @@
 
         public InstalationFormViewModel Instalation { get; set; }
 
-        //public PhotoFormViewModel Photos { get; set; }
+        public List<IFormFile> Photos { get; set; }
     }
 }

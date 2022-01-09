@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center ">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Price"></label>
-                                <input asp-for="Price" type="number" class="form-control" placeholder="Enter project price">
+                                <input asp-for="Price" type="number" step="0.01" class="form-control" placeholder="Enter project price">
                                 <span asp-validation-for="Price" class="small text-danger"></span>
                             </div>
                             <div class="form-check form-switch mt-3">
@@ -30,7 +30,12 @@
                                 <label asp-for="House.PassiveHouse" class="form-check-label">Passive House</label>
                             </div>
                         </div>
-                        <div id="floors">
+                        <div class="text-center mt-5">
+                            <div id="photo">
+                                <span>Select File:</span>
+                                <input asp-for="House.Photos" type="file"  multiple />
+                                <br />
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm">
@@ -39,27 +44,27 @@
                                 <h2>House</h2>
                                 <div class="form-group">
                                     <label asp-for="House.Area"></label>
-                                    <input asp-for="House.Area" type="number" class="form-control" placeholder="Enter house area">
+                                    <input asp-for="House.Area" type="number" step="0.01" class="form-control" placeholder="Enter house area">
                                     <span asp-validation-for="House.Area" class="small text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="House.BuiltUpArea"></label>
-                                    <input asp-for="House.BuiltUpArea" type="number" class="form-control" placeholder="Enter build up area">
+                                    <input asp-for="House.BuiltUpArea" type="number" step="0.01" class="form-control" placeholder="Enter build up area">
                                     <span asp-validation-for="House.BuiltUpArea" class="small text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="House.StepOfTheBuilding"></label>
-                                    <input asp-for="House.StepOfTheBuilding" type="number" class="form-control" placeholder="Enter step of the building">
+                                    <input asp-for="House.StepOfTheBuilding" type="number" step="0.01" class="form-control" placeholder="Enter step of the building">
                                     <span asp-validation-for="House.StepOfTheBuilding" class="small text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="House.LengthOfThePlot"></label>
-                                    <input asp-for="House.LengthOfThePlot" type="number" class="form-control" placeholder="Enter length of the plot">
+                                    <input asp-for="House.LengthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter length of the plot">
                                     <span asp-validation-for="House.LengthOfThePlot" class="small text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="House.WidthOfThePlot"></label>
-                                    <input asp-for="House.WidthOfThePlot" type="number" class="form-control" placeholder="Enter width of the plot">
+                                    <input asp-for="House.WidthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter width of the plot">
                                     <span asp-validation-for="House.WidthOfThePlot" class="small text-danger"></span>
                                 </div>
                                 <div class="form-group">
@@ -95,6 +100,8 @@
                                     <input asp-for="House.NumberOfFloors" type="number" id="numberOfFloors" onchange="addFields()" class="form-control" placeholder="Enter floors number">
                                     <span asp-validation-for="House.NumberOfFloors" class="small text-danger"></span>
                                 </div>
+                            </div>
+                            <div id="floors">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-5">Submit</button>

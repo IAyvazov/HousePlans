@@ -4,6 +4,7 @@
     using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.House;
     using HousePlans.Areas.Administration.Services.Instalation;
+    using HousePlans.Areas.Administration.Services.Photo;
     using HousePlans.Data;
     using HousePlans.Data.Models;
 
@@ -13,17 +14,20 @@
         private readonly IFloorService floorService;
         private readonly IHouseService houseService;
         private readonly IInstalationService instalationService;
+        private readonly IPhotoService photoService;
 
         public PlanService(
             ApplicationDbContext dbContext,
             IFloorService floorService,
             IHouseService houseService,
-            IInstalationService instalationService)
+            IInstalationService instalationService,
+            IPhotoService photoService)
         {
             this.dbContext = dbContext;
             this.floorService = floorService;
             this.houseService = houseService;
             this.instalationService = instalationService;
+            this.photoService = photoService;
         }
 
         public async Task<IEnumerable<PlanAllViewModel>> AllPlans()
@@ -54,6 +58,7 @@
             }
 
             await this.floorService.CreateFloor(model.House.Floors, houseId);
+            await this.photoService.Upload(model.House.Photos, houseId);
 
             var instalationId = await this.instalationService.CreateInstalation(model.House.Instalation);
 
