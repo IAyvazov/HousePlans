@@ -39,5 +39,27 @@
 
             return instalation.Id;
         }
+
+        public async Task<InstalationDetailsViewModel> GetById(int instalationId)
+         => this.dbContext.Instalations
+                  .Where(x => x.Id == instalationId)
+                  .Select(x => new InstalationDetailsViewModel
+                  {
+                      Biomass = x.Biomass,
+                      Chimney = x.Chimney,
+                      EcoPalletCoal = x.EcoPalletCoal,
+                      Electrical = x.Electrical,
+                      EnergyRecoveryFan = x.EnergyRecoveryFan,
+                      FireplaceWJ = x.FireplaceWJ,
+                      FloorHeating = x.FloorHeating,
+                      Gas = x.Gas,
+                      HeatPump = x.HeatPump,
+                      PelletStove = x.PelletStove,
+                      Petrol = x.Petrol,
+                      PhotovoltaicPanelsForElectricity = x.PhotovoltaicPanelsForElectricity,
+                      SolarHotWaterSystems = x.SolarHotWaterSystems,
+                      SolidFuel = x.SolidFuel,
+                  })
+                  .FirstOrDefault();
     }
 }

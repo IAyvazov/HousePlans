@@ -1,6 +1,7 @@
 ﻿namespace HousePlans.Areas.Administration.Controllers
 {
     using HousePlans.Areas.Administration.Models.Plan;
+    using HousePlans.Areas.Administration.Services.House;
     using HousePlans.Areas.Administration.Services.Plan;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@
     public class PlanController : AdministrationController
     {
         private readonly IPlanService planService;
+        private readonly IHouseService houseService;
 
-        public PlanController(IPlanService planService)
+        public PlanController(IPlanService planService, IHouseService houseService)
         {
             this.planService = planService;
+            this.houseService = houseService;
         }
 
         [Authorize(Roles = AdministratorRoleName)]
@@ -31,7 +34,7 @@
                 return Redirect("/Error");
             }
 
-           var id = await this.planService.CreatePlan(model);
+            var id = await this.planService.CreatePlan(model);
 
             return Redirect("/");
         }
@@ -42,6 +45,14 @@
             var plans = await this.planService.AllPlans();
 
             return View(plans);
+        }
+
+        [Authorize(Roles = AdministratorRoleName)]
+        public async Task<IActionResult> Details(int houseId)
+        {
+            var house = await this.houseService.Details(houseId);
+
+            return View(house);
         }
     }
 }

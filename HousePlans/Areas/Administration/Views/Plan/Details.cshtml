@@ -1,0 +1,237 @@
+﻿@using HousePlans.Areas.Administration.Models.House
+@using System.Linq
+
+@model HouseDetailsViewModel
+
+<div class="container bootdey">
+    <section class="panel">
+        <div class="row">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="pro-img-details">
+                        <img src="@Model.Photos.FirstOrDefault().Url" alt="ProjectPicture">
+                    </div>
+                    <div class="pro-img-list">
+                        @foreach (var photo in Model.Photos)
+                        {
+                            <a href="@photo.Url">
+                                <img src="@photo.Url" width="180" height="180" alt="">
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 col-md-8">
+                <nav>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="common-tab" data-toggle="tab" href="#common" role="tab" aria-controls="common" aria-selected="true">Common</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="instalation-tab" data-toggle="tab" href="#instalation" role="tab" aria-controls="instalation" aria-selected="false">Instalation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="materials-tab" data-toggle="tab" href="#materials" role="tab" aria-controls="materials" aria-selected="false">Materials</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="common" role="tabpanel" aria-labelledby="common-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th>@Model.Name</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Area</th>
+                                    <td>@Model.Area кв.м.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Built Up Area</th>
+                                    <td>@Model.BuiltUpArea кв.м.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Length Of The Plot</th>
+                                    <td>@Model.LengthOfThePlot м.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Width Of The Plot</th>
+                                    <td>@Model.WidthOfThePlot м.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Step Of The Building</th>
+                                    <td>@Model.StepOfTheBuilding м.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">House Type</th>
+                                    <td>@Model.Type</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Style</th>
+                                    <td>@Model.Style</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Roof</th>
+                                    <td>@Model.Roof</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Garage</th>
+                                    <td>@Model.Garage</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Passive House</th>
+                                    <td>@(Model.PassiveHouse? "Yes": "No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Number Of Floors</th>
+                                    <td>@Model.NumberOfFloors</td>
+                                </tr>
+                                @foreach (var floor in Model.Floors)
+                                {
+                                    <tr>
+                                        <th scope="row">Floor @floor.Number</th>
+                                        <td>
+                                            @String.Join(" | ",floor.Rooms.Select(x=>x.Name +" "+ x.Area +"кв.м."))
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="instalation" role="tabpanel" aria-labelledby="instalation-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Biomass</th>
+                                    <td>@(Model.Instalation.Biomass?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Chimney</th>
+                                    <td>@(Model.Instalation.Chimney?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Eco Pallet Coal</th>
+                                    <td>@(Model.Instalation.EcoPalletCoal?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Electrical</th>
+                                    <td>@(Model.Instalation.Electrical?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Energy Recovery Fan</th>
+                                    <td>@(Model.Instalation.EnergyRecoveryFan?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fireplace WJ</th>
+                                    <td>@(Model.Instalation.FireplaceWJ? "Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Floor Heating</th>
+                                    <td>@(Model.Instalation.FloorHeating?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gas</th>
+                                    <td>@(Model.Instalation.Gas?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Heat Pump</th>
+                                    <td>@(Model.Instalation.HeatPump?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pellet Stove</th>
+                                    <td>@(Model.Instalation.PelletStove?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Petrol</th>
+                                    <td>@(Model.Instalation.Petrol?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Photovoltaic Panels For Electricity</th>
+                                    <td>@(Model.Instalation.PhotovoltaicPanelsForElectricity?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Solar Hot Water Systems</th>
+                                    <td>@(Model.Instalation.SolarHotWaterSystems?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Solid Fuel</th>
+                                    <td>@(Model.Instalation.SolidFuel?"Yes":"No")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="materials" role="tabpanel" aria-labelledby="materials-tab">
+                           <table class="table table-bordered">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Biomass</th>
+                                    <td>@(Model.Instalation.Biomass?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Chimney</th>
+                                    <td>@(Model.Instalation.Chimney?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Eco Pallet Coal</th>
+                                    <td>@(Model.Instalation.EcoPalletCoal?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Electrical</th>
+                                    <td>@(Model.Instalation.Electrical?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Energy Recovery Fan</th>
+                                    <td>@(Model.Instalation.EnergyRecoveryFan?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fireplace WJ</th>
+                                    <td>@(Model.Instalation.FireplaceWJ? "Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Floor Heating</th>
+                                    <td>@(Model.Instalation.FloorHeating?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gas</th>
+                                    <td>@(Model.Instalation.Gas?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Heat Pump</th>
+                                    <td>@(Model.Instalation.HeatPump?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pellet Stove</th>
+                                    <td>@(Model.Instalation.PelletStove?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Petrol</th>
+                                    <td>@(Model.Instalation.Petrol?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Photovoltaic Panels For Electricity</th>
+                                    <td>@(Model.Instalation.PhotovoltaicPanelsForElectricity?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Solar Hot Water Systems</th>
+                                    <td>@(Model.Instalation.SolarHotWaterSystems?"Yes":"No")</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Solid Fuel</th>
+                                    <td>@(Model.Instalation.SolidFuel?"Yes":"No")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

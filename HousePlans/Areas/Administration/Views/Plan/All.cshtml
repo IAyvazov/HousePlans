@@ -26,7 +26,7 @@
                 <td>@plan.ModifiedOn</td>
                 <td>@(plan.IsDeleted? "Yes": "No")</td>
                 <td>@(plan.IsDeleted? plan.DeletedOn: "-")</td>
-                <td><a class="btn btn-primary" asp-area="Administration" asp-controller="Plan" asp-action="Details" asp-route-tripId="@plan.HouseId">Details</a></td>
+                <td><a class="btn btn-primary" asp-area="Administration" asp-controller="Plan" asp-action="Details" asp-route-houseId="@plan.HouseId">Details</a></td>
                 <td><a class="btn btn-warning">Edit</a></td>
                 <td><a class="btn btn-danger" @(plan.IsDeleted? "disabled": "")>Delete</a></td>
             </tr>
