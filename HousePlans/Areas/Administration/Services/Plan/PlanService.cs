@@ -1,82 +1,77 @@
 ﻿namespace HousePlans.Areas.Administration.Services.Plan
 {
     using HousePlans.Areas.Administration.Models.Plan;
+    using HousePlans.Areas.Administration.Services.Floor;
+    using HousePlans.Areas.Administration.Services.House;
+    using HousePlans.Areas.Administration.Services.Instalation;
     using HousePlans.Data;
     using HousePlans.Data.Models;
-    using HousePlans.Data.Models.Enums;
 
     public class PlanService : IPlanService
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IFloorService floorService;
+        private readonly IHouseService houseService;
+        private readonly IInstalationService instalationService;
 
-        public PlanService(ApplicationDbContext dbContext)
+        public PlanService(
+            ApplicationDbContext dbContext,
+            IFloorService floorService,
+            IHouseService houseService,
+            IInstalationService instalationService)
         {
             this.dbContext = dbContext;
+            this.floorService = floorService;
+            this.houseService = houseService;
+            this.instalationService = instalationService;
+        }
+
+        public async Task<IEnumerable<PlanAllViewModel>> AllPlans()
+        {
+            var allPlans = this.dbContext.Plans
+                .Select(p => new PlanAllViewModel
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    HouseId = p.HouseId,
+                    CreatedOn = p.CreatedOn.ToString(),
+                    IsDeleted = p.IsDeleted,
+                    DeletedOn = p.DeletedOn.ToString(),
+                    ModifiedOn = p.ModifiedOn.ToString(),
+                })
+                .ToList();
+
+            return allPlans;
         }
 
         public async Task<int> CreatePlan(PlanFormViewModel model)
         {
+            var houseId = await this.houseService.CreateHouse(model.House);
 
-            string roof = model.House.Roof.ToString();
-            string garage = model.House.Garage.ToString();
-            string style = model.House.Style.ToString();
-            string type = model.House.Type.ToString();
-
-            var house = new House
+            if (houseId == 0)
             {
-                CreatedOn = DateTime.UtcNow,
-                Area = model.House.Area,
-                BuiltUpArea = model.House.BuiltUpArea,
-                LengthOfThePlot = model.House.LengthOfThePlot,
-                WidthOfThePlot = model.House.WidthOfThePlot,
-                StepOfTheBuilding = model.House.StepOfTheBuilding,
-                Roof = (Roof)Enum.Parse(typeof(Roof), roof),
-                Garage = (Garage)Enum.Parse(typeof(Garage), garage),
-                Style = (Style)Enum.Parse(typeof(Style), style),
-                Type = (HouseType)Enum.Parse(typeof(HouseType), type),
-            };
-
-            await dbContext.Houses.AddAsync(house);
-
-            var count = 0;
-
-            foreach (var floor in model.House.Floors)
-            {
-                var newFloor = new Floor
-                {
-                    CreatedOn = DateTime.UtcNow,
-                    Number = count,
-                    HouseId= house.Id,
-                };
-
-               await dbContext.Floors.AddAsync(newFloor);
-
-                foreach (var room in floor.Rooms)
-                {
-                    var newRoom = new Room
-                    {
-                        CreatedOn= DateTime.UtcNow,
-                        Name = room.Name,
-                        Area = room.Area,
-                        FloorId =newFloor.Id,
-                    };
-
-                    await dbContext.Rooms.AddAsync(newRoom);
-                }
-
-                count++;
+                return -1;
             }
 
+            await this.floorService.CreateFloor(model.House.Floors, houseId);
+
+            var instalationId = await this.instalationService.CreateInstalation(new Models.Instalation.InstalationFormViewModel());
+
+            if (instalationId == 0)
+            {
+                return -1;
+            }
 
             var plan = new Plan
             {
                 CreatedOn = DateTime.UtcNow,
                 Name = model.Name,
                 Price = model.Price,
-                HouseId = house.Id,
+                HouseId = houseId,
+                InstalationId = instalationId,
             };
 
-            await this.dbContext.AddAsync(plan);
+            await this.dbContext.Plans.AddAsync(plan);
             await this.dbContext.SaveChangesAsync();
 
             return plan.Id;

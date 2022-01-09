@@ -1,4 +1,8 @@
+using HousePlans.Areas.Administration.Services.Floor;
+using HousePlans.Areas.Administration.Services.House;
+using HousePlans.Areas.Administration.Services.Instalation;
 using HousePlans.Areas.Administration.Services.Plan;
+using HousePlans.Areas.Administration.Services.Room;
 using HousePlans.Data;
 using HousePlans.Data.Seeding;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +21,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IPlanService, PlanService>();
+builder.Services.AddTransient<IRoomService, RoomService>();
+builder.Services.AddTransient<IFloorService, FloorService>();
+builder.Services.AddTransient<IHouseService, HouseService>();
+builder.Services.AddTransient<IInstalationService, InstalationService>();
 
 var app = builder.Build();
 

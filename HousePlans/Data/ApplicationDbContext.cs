@@ -22,5 +22,13 @@
         public DbSet<Plan> Plans { get; set; }
 
         public DbSet<Instalation> Instalations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+          
+
+            base.OnModelCreating(builder);
+        }
+
     }
 }

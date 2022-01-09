@@ -1,6 +1,9 @@
-﻿namespace HousePlans.Areas.Administration.Services.Plan
+﻿namespace HousePlans.Areas.Administration.Services.House
 {
+    using HousePlans.Areas.Administration.Models.House;
+
     public interface IHouseService
     {
+        Task<int> CreateHouse(HouseFormVIewModel model);
     }
 }

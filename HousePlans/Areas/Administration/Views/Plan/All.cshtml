@@ -1,0 +1,37 @@
+﻿@using HousePlans.Areas.Administration.Models.Plan
+
+@model IEnumerable<PlanAllViewModel>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Modified On</th>
+            <th scope="col">Deleted</th>
+            <th scope="col">Deleted On</th>
+            <th scope="col">House Details</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var plan in Model)
+        {
+            <tr>
+                <td>@plan.Name</td>
+                <td>@plan.Price</td>
+                <td>@plan.CreatedOn</td>
+                <td>@plan.ModifiedOn</td>
+                <td>@(plan.IsDeleted? "Yes": "No")</td>
+                <td>@(plan.IsDeleted? plan.DeletedOn: "-")</td>
+                <td><a class="btn btn-primary" asp-area="Administration" asp-controller="Plan" asp-action="Details" asp-route-tripId="@plan.HouseId">Details</a></td>
+                <td><a class="btn btn-warning">Edit</a></td>
+                <td><a class="btn btn-danger" @(plan.IsDeleted? "disabled": "")>Delete</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<a asp-area="Administration" asp-controller="Plan" asp-action="Create">Add Plan</a>

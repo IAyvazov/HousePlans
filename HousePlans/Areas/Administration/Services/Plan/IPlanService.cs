@@ -5,5 +5,7 @@
     public interface IPlanService
     {
         Task<int> CreatePlan(PlanFormViewModel model);
+
+        Task<IEnumerable<PlanAllViewModel>> AllPlans();
     }
 }

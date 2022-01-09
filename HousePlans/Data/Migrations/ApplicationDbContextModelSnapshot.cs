@@ -249,7 +249,8 @@ namespace HousePlans.Data.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.HasIndex("InstalationId");
+                    b.HasIndex("InstalationId")
+                        .IsUnique();
 
                     b.ToTable("Plans");
                 });
@@ -524,8 +525,8 @@ namespace HousePlans.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("HousePlans.Data.Models.Instalation", "Instalation")
-                        .WithMany()
-                        .HasForeignKey("InstalationId")
+                        .WithOne("Plan")
+                        .HasForeignKey("HousePlans.Data.Models.Plan", "InstalationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -606,6 +607,12 @@ namespace HousePlans.Data.Migrations
                     b.Navigation("Floors");
 
                     b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("HousePlans.Data.Models.Instalation", b =>
+                {
+                    b.Navigation("Plan")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

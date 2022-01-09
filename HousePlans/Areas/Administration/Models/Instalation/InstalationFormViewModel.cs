@@ -1,6 +1,6 @@
-﻿namespace HousePlans.Data.Models
+﻿namespace HousePlans.Areas.Administration.Models.Instalation
 {
-    public class Instalation : BaseModel<int>
+    public class InstalationFormViewModel
     {
         public bool Gas { get; set; }
 
@@ -29,7 +29,5 @@
         public bool FireplaceWJ { get; set; }
 
         public bool PhotovoltaicPanelsForElectricity { get; set; }
-
-        public Plan Plan { get; set; }
     }
 }

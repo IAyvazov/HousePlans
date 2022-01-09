@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HousePlans.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220105201824_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220109120619_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,7 @@ namespace HousePlans.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("HouseId")
+                    b.Property<int>("HouseId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -97,6 +97,9 @@ namespace HousePlans.Data.Migrations
 
                     b.Property<double>("StepOfTheBuilding")
                         .HasColumnType("float");
+
+                    b.Property<int>("Style")
+                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -238,7 +241,8 @@ namespace HousePlans.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -247,7 +251,8 @@ namespace HousePlans.Data.Migrations
 
                     b.HasIndex("HouseId");
 
-                    b.HasIndex("InstalationId");
+                    b.HasIndex("InstalationId")
+                        .IsUnique();
 
                     b.ToTable("Plans");
                 });
@@ -269,7 +274,7 @@ namespace HousePlans.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FloorId")
+                    b.Property<int>("FloorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -493,9 +498,13 @@ namespace HousePlans.Data.Migrations
 
             modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
                 {
-                    b.HasOne("HousePlans.Data.Models.House", null)
+                    b.HasOne("HousePlans.Data.Models.House", "House")
                         .WithMany("Floors")
-                        .HasForeignKey("HouseId");
+                        .HasForeignKey("HouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("House");
                 });
 
             modelBuilder.Entity("HousePlans.Data.Models.Photo", b =>
@@ -518,8 +527,8 @@ namespace HousePlans.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("HousePlans.Data.Models.Instalation", "Instalation")
-                        .WithMany()
-                        .HasForeignKey("InstalationId")
+                        .WithOne("Plan")
+                        .HasForeignKey("HousePlans.Data.Models.Plan", "InstalationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -530,9 +539,13 @@ namespace HousePlans.Data.Migrations
 
             modelBuilder.Entity("HousePlans.Data.Models.Room", b =>
                 {
-                    b.HasOne("HousePlans.Data.Models.Floor", null)
+                    b.HasOne("HousePlans.Data.Models.Floor", "Floor")
                         .WithMany("Rooms")
-                        .HasForeignKey("FloorId");
+                        .HasForeignKey("FloorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Floor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -596,6 +609,12 @@ namespace HousePlans.Data.Migrations
                     b.Navigation("Floors");
 
                     b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("HousePlans.Data.Models.Instalation", b =>
+                {
+                    b.Navigation("Plan")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

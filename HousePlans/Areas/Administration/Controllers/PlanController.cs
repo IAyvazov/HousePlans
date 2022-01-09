@@ -24,16 +24,24 @@
 
         [Authorize(Roles = AdministratorRoleName)]
         [HttpPost]
-        public IActionResult Create(PlanFormViewModel model)
+        public async Task<IActionResult> Create(PlanFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return Redirect("/Error");
             }
 
-           var id = this.planService.CreatePlan(model);
+           var id = await this.planService.CreatePlan(model);
 
             return Redirect("/");
+        }
+
+        [Authorize(Roles = AdministratorRoleName)]
+        public async Task<IActionResult> All()
+        {
+            var plans = await this.planService.AllPlans();
+
+            return View(plans);
         }
     }
 }
