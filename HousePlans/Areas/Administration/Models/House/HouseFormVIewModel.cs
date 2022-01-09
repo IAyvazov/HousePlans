@@ -53,7 +53,7 @@
 
         public HashSet<FloorFormViewModel> Floors { get; set; }
 
-        //public InstalationFormViewModel Instalation { get; set; }
+        public InstalationFormViewModel Instalation { get; set; }
 
         //public PhotoFormViewModel Photos { get; set; }
     }

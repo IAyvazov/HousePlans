@@ -17,21 +17,21 @@
         {
             var instalation = new Instalation
             {
-                Biomass = false,
-                Chimney = false,
                 CreatedOn = DateTime.UtcNow,
-                EcoPalletCoal = false,
-                Electrical = false,
-                EnergyRecoveryFan = false,
-                FireplaceWJ = false,
-                FloorHeating = false,
-                Gas = false,
-                HeatPump = false,
-                PelletStove = false,
-                Petrol = false,
-                PhotovoltaicPanelsForElectricity = false,
-                SolarHotWaterSystems = false,
-                SolidFuel = false,
+                Biomass = model.Biomass,
+                Chimney = model.Chimney,
+                EcoPalletCoal = model.EcoPalletCoal,
+                Electrical = model.Electrical,
+                EnergyRecoveryFan = model.EnergyRecoveryFan,
+                FireplaceWJ = model.FireplaceWJ,
+                FloorHeating = model.FloorHeating,
+                Gas = model.Gas,
+                HeatPump = model.HeatPump,
+                PelletStove = model.PelletStove,
+                Petrol = model.Petrol,
+                PhotovoltaicPanelsForElectricity = model.PhotovoltaicPanelsForElectricity,
+                SolarHotWaterSystems = model.SolarHotWaterSystems,
+                SolidFuel = model.SolidFuel,
             };
 
             await this.dbContext.Instalations.AddAsync(instalation);

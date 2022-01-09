@@ -55,7 +55,7 @@
 
             await this.floorService.CreateFloor(model.House.Floors, houseId);
 
-            var instalationId = await this.instalationService.CreateInstalation(new Models.Instalation.InstalationFormViewModel());
+            var instalationId = await this.instalationService.CreateInstalation(model.House.Instalation);
 
             if (instalationId == 0)
             {
