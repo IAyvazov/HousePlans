@@ -5,6 +5,7 @@
     using HousePlans.Areas.Administration.Models.House;
     using HousePlans.Areas.Administration.Models.Photo;
     using HousePlans.Areas.Administration.Models.Room;
+    using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.Instalation;
     using HousePlans.Data;
     using HousePlans.Data.Models;
@@ -14,11 +15,16 @@
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IInstalationAdministrationService instalationService;
+        private readonly IFloorAdministrationService floorService;
 
-        public HouseAdministrationService(ApplicationDbContext dbContext,IInstalationAdministrationService instalationService)
+        public HouseAdministrationService(
+            ApplicationDbContext dbContext,
+            IInstalationAdministrationService instalationService,
+            IFloorAdministrationService floorService)
         {
             this.dbContext = dbContext;
             this.instalationService = instalationService;
+            this.floorService = floorService;
         }
 
         public async Task<int> CreateHouse(HouseFormVIewModel model)
@@ -94,11 +100,40 @@
                        .ToHashSet(),
                        Instalation = instalations,
                        Photos = x.Photos
-                       .Select(x=> new PhotoDetailsViewModel
+                       .Select(x => new PhotoDetailsViewModel
                        {
                            Url = x.Url,
                        })
                        .ToHashSet(),
+                   })
+                   .FirstOrDefault();
+
+            return house;
+        }
+
+        public async Task<HouseFormVIewModel> GetById(int planId)
+        {
+            var instalation = await this.instalationService.GetByPlanId(planId);
+
+            var floor = await this.floorService.GetByPlanId(planId);
+
+            var house = this.dbContext.Plans
+                   .Where(x => x.Id == planId)
+                   .Select(x => new HouseFormVIewModel
+                   {
+                       Area = x.House.Area,
+                       BuiltUpArea = x.House.BuiltUpArea,
+                       LengthOfThePlot = x.House.LengthOfThePlot,
+                       StepOfTheBuilding = x.House.StepOfTheBuilding,
+                       WidthOfThePlot = x.House.WidthOfThePlot,
+                       NumberOfFloors = x.House.Floors.Count(),
+                       PassiveHouse = x.House.PassiveHouse,
+                       Garage = (GarageFromViewModel)x.House.Garage,
+                       Roof = (RoofFormVIewModel)x.House.Roof,
+                       Style = (StyleFormViewModel)x.House.Style,
+                       Type = (HouseTypeFormViewModel)x.House.Type,
+                       Instalation = instalation,
+                       Floors = floor.ToHashSet(),
                    })
                    .FirstOrDefault();
 

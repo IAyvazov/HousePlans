@@ -7,5 +7,7 @@
         Task<int> CreateInstalation(InstalationFormViewModel model);
 
         Task<InstalationDetailsViewModel> GetById(int instalationId);
+
+        Task<InstalationFormViewModel> GetByPlanId(int planId);
     }
 }

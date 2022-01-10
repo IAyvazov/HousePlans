@@ -6,6 +6,10 @@
     {
         Task<int> CreatePlan(PlanFormViewModel model);
 
+        Task<PlanFormViewModel> GetById(int planId);
+
         Task<IEnumerable<PlanAllViewModel>> AllPlans();
+
+        Task<bool> Delete(int planId);
     }
 }

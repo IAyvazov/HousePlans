@@ -25,10 +25,17 @@
                 <td>@plan.CreatedOn</td>
                 <td>@plan.ModifiedOn</td>
                 <td>@(plan.IsDeleted? "Yes": "No")</td>
-                <td>@(plan.IsDeleted? plan.DeletedOn: "-")</td>
+                <td>@(plan.IsDeleted? plan.DeletedOn : "-")</td>
                 <td><a class="btn btn-primary" asp-area="Administration" asp-controller="Plan" asp-action="Details" asp-route-houseId="@plan.HouseId">Details</a></td>
-                <td><a class="btn btn-warning">Edit</a></td>
-                <td><a class="btn btn-danger" @(plan.IsDeleted? "disabled": "")>Delete</a></td>
+                <td><a class="btn btn-warning" asp-area="Administration" asp-controller="Plan" asp-action="Edit" asp-route-planId="@plan.Id">Edit</a></td>
+                @if (!plan.IsDeleted)
+                {
+                    <td><a asp-area="Administration" asp-controller="Plan" asp-action="Delete" asp-route-planId="@plan.Id" class="btn btn-danger">Delete</a></td>
+                }
+                else
+                {
+                    <td><a class="btn btn-danger disabled">Delete</a></td>
+                }
             </tr>
         }
 

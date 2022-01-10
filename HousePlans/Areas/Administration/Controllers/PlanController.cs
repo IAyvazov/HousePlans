@@ -54,5 +54,26 @@
 
             return View(house);
         }
+
+        [Authorize(Roles = AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int planId)
+        {
+            var plan = await this.planService.GetById(planId);
+
+            return View(plan);
+        }
+
+        [Authorize(Roles = AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int planId)
+        {
+            var isDeleted = await this.planService.Delete(planId);
+
+            if (!isDeleted)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

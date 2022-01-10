@@ -15,8 +15,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Shared\" />
-  </ItemGroup>
-
 </Project>

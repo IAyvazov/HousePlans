@@ -26,7 +26,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IPlanAdministrationService, PlanAdministrationService>();
 builder.Services.AddTransient<IRoomAdministrationService, RoomAdministrationService>();
-builder.Services.AddTransient<IFloorService, FloorService>();
+builder.Services.AddTransient<IFloorAdministrationService, FloorAdministrationService>();
 builder.Services.AddTransient<IHouseAdministrationService, HouseAdministrationService>();
 builder.Services.AddTransient<IInstalationAdministrationService, InstalationAdministrationService>();
 builder.Services.AddTransient<IPhotoAdministrationService, PhotoAdministrationService>();

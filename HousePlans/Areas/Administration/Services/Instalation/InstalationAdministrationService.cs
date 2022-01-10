@@ -61,5 +61,27 @@
                       SolidFuel = x.SolidFuel,
                   })
                   .FirstOrDefault();
+
+        public async Task<InstalationFormViewModel> GetByPlanId(int planId)
+        => this.dbContext.Instalations
+                 .Where(x => x.Plan.Id == planId)
+                 .Select(x => new InstalationFormViewModel
+                 {
+                     Biomass = x.Biomass,
+                     Chimney = x.Chimney,
+                     EcoPalletCoal = x.EcoPalletCoal,
+                     Electrical = x.Electrical,
+                     EnergyRecoveryFan = x.EnergyRecoveryFan,
+                     FireplaceWJ = x.FireplaceWJ,
+                     FloorHeating = x.FloorHeating,
+                     Gas = x.Gas,
+                     HeatPump = x.HeatPump,
+                     PelletStove = x.PelletStove,
+                     Petrol = x.Petrol,
+                     PhotovoltaicPanelsForElectricity = x.PhotovoltaicPanelsForElectricity,
+                     SolarHotWaterSystems = x.SolarHotWaterSystems,
+                     SolidFuel = x.SolidFuel,
+                 })
+                 .FirstOrDefault();
     }
 }

@@ -3,8 +3,10 @@
     using System.Collections.Generic;
     using HousePlans.Areas.Administration.Models.Floor;
 
-    public interface IFloorService
+    public interface IFloorAdministrationService
     {
         Task CreateFloor(IEnumerable<FloorFormViewModel> model, int houseId);
+
+        Task<IEnumerable<FloorFormViewModel>> GetByPlanId(int planId);
     }
 }
