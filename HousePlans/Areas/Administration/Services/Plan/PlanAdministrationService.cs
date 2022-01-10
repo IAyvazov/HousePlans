@@ -89,7 +89,6 @@
 
         public async Task<bool> Delete(int planId)
         {
-
             var plan = this.dbContext.Plans
                 .Where(x => x.Id == planId)
                 .Include(x => x.House)
@@ -105,22 +104,68 @@
 
             plan.IsDeleted = true;
             plan.DeletedOn = DateTime.UtcNow;
+            plan.ModifiedOn = DateTime.UtcNow;
 
             plan.House.IsDeleted = true;
             plan.House.DeletedOn = DateTime.UtcNow;
+            plan.House.ModifiedOn = DateTime.UtcNow;
 
             plan.Instalation.IsDeleted = true;
             plan.Instalation.DeletedOn = DateTime.UtcNow;
+            plan.Instalation.ModifiedOn = DateTime.UtcNow;
 
             foreach (var floor in plan.House.Floors)
             {
                 floor.IsDeleted = true;
                 floor.DeletedOn = DateTime.UtcNow;
+                floor.ModifiedOn = DateTime.UtcNow;
 
                 foreach (var room in floor.Rooms)
                 {
                     room.IsDeleted = true;
                     room.DeletedOn = DateTime.UtcNow;
+                    room.ModifiedOn = DateTime.UtcNow;
+                }
+            }
+
+            await this.dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> Restore(int planId)
+        {
+            var plan = this.dbContext.Plans
+                .Where(x => x.Id == planId)
+                .Include(x => x.House)
+                .ThenInclude(x => x.Floors)
+                .ThenInclude(x => x.Rooms)
+                .Include(x => x.Instalation)
+                .FirstOrDefault();
+
+            if (plan == null)
+            {
+                return false;
+            }
+
+            plan.IsDeleted = false;
+            plan.ModifiedOn = DateTime.UtcNow;
+
+            plan.House.IsDeleted = false;
+            plan.House.ModifiedOn = DateTime.UtcNow;
+
+            plan.Instalation.IsDeleted = false;
+            plan.Instalation.ModifiedOn = DateTime.UtcNow;
+
+            foreach (var floor in plan.House.Floors)
+            {
+                floor.IsDeleted = false;
+                floor.ModifiedOn = DateTime.UtcNow;
+
+                foreach (var room in floor.Rooms)
+                {
+                    room.IsDeleted = false;
+                    room.ModifiedOn = DateTime.UtcNow;
                 }
             }
 

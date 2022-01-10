@@ -34,7 +34,7 @@
                 }
                 else
                 {
-                    <td><a class="btn btn-danger disabled">Delete</a></td>
+                     <td><a asp-area="Administration" asp-controller="Plan" asp-action="Restore" asp-route-planId="@plan.Id" class="btn btn-success">Restore</a></td>
                 }
             </tr>
         }

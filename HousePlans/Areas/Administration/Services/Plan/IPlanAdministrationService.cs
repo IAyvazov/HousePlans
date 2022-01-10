@@ -11,5 +11,7 @@
         Task<IEnumerable<PlanAllViewModel>> AllPlans();
 
         Task<bool> Delete(int planId);
+
+        Task<bool> Restore(int planId);
     }
 }

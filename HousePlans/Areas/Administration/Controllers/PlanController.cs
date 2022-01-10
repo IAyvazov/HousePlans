@@ -75,5 +75,18 @@
 
             return RedirectToAction(nameof(All));
         }
+
+        [Authorize(Roles = AdministratorRoleName)]
+        public async Task<IActionResult> Restore(int planId)
+        {
+            var isDeleted = await this.planService.Restore(planId);
+
+            if (!isDeleted)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }
