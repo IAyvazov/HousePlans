@@ -2,7 +2,7 @@
 {
     using HousePlans.Areas.Administration.Models.House;
 
-    public interface IHouseService
+    public interface IHouseAdministrationService
     {
         Task<int> CreateHouse(HouseFormVIewModel model);
 

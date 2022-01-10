@@ -8,20 +8,20 @@
     using HousePlans.Data;
     using HousePlans.Data.Models;
 
-    public class PlanService : IPlanService
+    public class PlanAdministrationService : IPlanAdministrationService
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IFloorService floorService;
-        private readonly IHouseService houseService;
-        private readonly IInstalationService instalationService;
-        private readonly IPhotoService photoService;
+        private readonly IHouseAdministrationService houseService;
+        private readonly IInstalationAdministrationService instalationService;
+        private readonly IPhotoAdministrationService photoService;
 
-        public PlanService(
+        public PlanAdministrationService(
             ApplicationDbContext dbContext,
             IFloorService floorService,
-            IHouseService houseService,
-            IInstalationService instalationService,
-            IPhotoService photoService)
+            IHouseAdministrationService houseService,
+            IInstalationAdministrationService instalationService,
+            IPhotoAdministrationService photoService)
         {
             this.dbContext = dbContext;
             this.floorService = floorService;

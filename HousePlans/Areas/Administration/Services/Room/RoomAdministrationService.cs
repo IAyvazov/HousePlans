@@ -4,11 +4,11 @@
     using HousePlans.Data;
     using HousePlans.Data.Models;
 
-    public class RoomService : IRoomService
+    public class RoomAdministrationService : IRoomAdministrationService
     {
         private readonly ApplicationDbContext dbContext;
 
-        public RoomService(ApplicationDbContext dbContext)
+        public RoomAdministrationService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

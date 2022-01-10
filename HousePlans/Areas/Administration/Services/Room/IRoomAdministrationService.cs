@@ -2,7 +2,7 @@
 {
     using HousePlans.Areas.Administration.Models.Room;
 
-    public interface IRoomService
+    public interface IRoomAdministrationService
     {
         Task CreateRoom(IEnumerable<RoomFormViewModel> model, int floorId);
     }

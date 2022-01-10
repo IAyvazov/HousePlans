@@ -4,11 +4,11 @@
     using HousePlans.Data;
     using HousePlans.Data.Models;
 
-    public class InstalationService : IInstalationService
+    public class InstalationAdministrationService : IInstalationAdministrationService
     {
         private readonly ApplicationDbContext dbContext;
 
-        public InstalationService(ApplicationDbContext dbContext)
+        public InstalationAdministrationService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

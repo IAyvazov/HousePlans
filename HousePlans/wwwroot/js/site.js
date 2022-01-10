@@ -55,7 +55,7 @@ function addRoomFields(e) {
 
 
         var h2 = document.createElement("h2");
-        h2.textContent = "Room " + (i+1);
+        h2.textContent = "Room " + (i + 1);
 
         var divName = document.createElement("div");
         divName.setAttribute("class", "form-group");
@@ -85,7 +85,7 @@ function addRoomFields(e) {
         inputArea.setAttribute("class", "form-control");
         inputArea.setAttribute("name", `House.Floors[${floorNumber}].Rooms[${i}].Area`);
 
-        
+
         divName.appendChild(labelName);
         divName.appendChild(inputName);
 
@@ -102,3 +102,13 @@ $('#myTab a').on('click', function (e) {
     e.preventDefault()
     $(this).tab('show')
 })
+
+function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+}
+
+function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+}

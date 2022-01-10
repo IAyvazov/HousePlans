@@ -2,7 +2,7 @@
 {
     using HousePlans.Areas.Administration.Models.Plan;
 
-    public interface IPlanService
+    public interface IPlanAdministrationService
     {
         Task<int> CreatePlan(PlanFormViewModel model);
 

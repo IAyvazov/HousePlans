@@ -10,10 +10,10 @@
 
     public class PlanController : AdministrationController
     {
-        private readonly IPlanService planService;
-        private readonly IHouseService houseService;
+        private readonly IPlanAdministrationService planService;
+        private readonly IHouseAdministrationService houseService;
 
-        public PlanController(IPlanService planService, IHouseService houseService)
+        public PlanController(IPlanAdministrationService planService, IHouseAdministrationService houseService)
         {
             this.planService = planService;
             this.houseService = houseService;

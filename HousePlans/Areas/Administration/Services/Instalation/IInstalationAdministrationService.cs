@@ -2,7 +2,7 @@
 {
     using HousePlans.Areas.Administration.Models.Instalation;
 
-    public interface IInstalationService
+    public interface IInstalationAdministrationService
     {
         Task<int> CreateInstalation(InstalationFormViewModel model);
 

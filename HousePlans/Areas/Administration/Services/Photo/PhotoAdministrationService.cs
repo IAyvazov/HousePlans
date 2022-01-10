@@ -2,12 +2,12 @@
 {
     using HousePlans.Data;
     using HousePlans.Data.Models;
-    public class PhotoService : IPhotoService
+    public class PhotoAdministrationService : IPhotoAdministrationService
     {
         private readonly IWebHostEnvironment environment;
         private readonly ApplicationDbContext dbContext;
 
-        public PhotoService(IWebHostEnvironment environment, ApplicationDbContext dbContext)
+        public PhotoAdministrationService(IWebHostEnvironment environment, ApplicationDbContext dbContext)
         {
             this.environment = environment;
             this.dbContext = dbContext;

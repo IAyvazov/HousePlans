@@ -6,6 +6,7 @@ using HousePlans.Areas.Administration.Services.Plan;
 using HousePlans.Areas.Administration.Services.Room;
 using HousePlans.Data;
 using HousePlans.Data.Seeding;
+using HousePlans.Services.Plan;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,12 +22,14 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddTransient<IPlanService, PlanService>();
-builder.Services.AddTransient<IRoomService, RoomService>();
+builder.Services.AddTransient<IPlanAdministrationService, PlanAdministrationService>();
+builder.Services.AddTransient<IRoomAdministrationService, RoomAdministrationService>();
 builder.Services.AddTransient<IFloorService, FloorService>();
-builder.Services.AddTransient<IHouseService, HouseService>();
-builder.Services.AddTransient<IInstalationService, InstalationService>();
-builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddTransient<IHouseAdministrationService, HouseAdministrationService>();
+builder.Services.AddTransient<IInstalationAdministrationService, InstalationAdministrationService>();
+builder.Services.AddTransient<IPhotoAdministrationService, PhotoAdministrationService>();
+
+builder.Services.AddTransient<IPlanService, PlanService>();
 
 var app = builder.Build();
 

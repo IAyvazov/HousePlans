@@ -9,9 +9,9 @@
     public class FloorService : IFloorService
     {
         private readonly ApplicationDbContext dbContext;
-        private readonly IRoomService roomService;
+        private readonly IRoomAdministrationService roomService;
 
-        public FloorService(ApplicationDbContext dbContext, IRoomService roomService)
+        public FloorService(ApplicationDbContext dbContext, IRoomAdministrationService roomService)
         {
             this.dbContext = dbContext;
             this.roomService = roomService;

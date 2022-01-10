@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +10,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HousePlans.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -27,14 +28,14 @@
                             <a class="nav-link  xx-large" asp-controller="Home" asp-action="Index"><span class="h4">Home</span></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span class="h4">Projects</span>
+                            <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="h4">Projects</span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" >Action</a>
-                                <a class="dropdown-item" >Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item">Something else here</a>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="All">All</a>
+                                <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Another action</a>
+                                <div class="dropdown-divider text-light"></div>
+                                <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Something else here</a>
                             </div>
                         </li>
                         <li class="nav-item">

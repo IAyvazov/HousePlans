@@ -1,6 +1,6 @@
 ﻿namespace HousePlans.Areas.Administration.Services.Photo
 {
-    public interface IPhotoService
+    public interface IPhotoAdministrationService
     {
         Task Upload(IEnumerable<IFormFile> formFiles, int houseId);
     }

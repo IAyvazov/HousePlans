@@ -3,7 +3,6 @@
     using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.Floor;
     using HousePlans.Areas.Administration.Models.House;
-    using HousePlans.Areas.Administration.Models.Instalation;
     using HousePlans.Areas.Administration.Models.Photo;
     using HousePlans.Areas.Administration.Models.Room;
     using HousePlans.Areas.Administration.Services.Instalation;
@@ -11,12 +10,12 @@
     using HousePlans.Data.Models;
     using HousePlans.Data.Models.Enums;
 
-    public class HouseService : IHouseService
+    public class HouseAdministrationService : IHouseAdministrationService
     {
         private readonly ApplicationDbContext dbContext;
-        private readonly IInstalationService instalationService;
+        private readonly IInstalationAdministrationService instalationService;
 
-        public HouseService(ApplicationDbContext dbContext,IInstalationService instalationService)
+        public HouseAdministrationService(ApplicationDbContext dbContext,IInstalationAdministrationService instalationService)
         {
             this.dbContext = dbContext;
             this.instalationService = instalationService;
