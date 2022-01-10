@@ -7,8 +7,8 @@
     ViewData["Title"] = "Admin Page";
 }
 
-<div class="container-fluid">
-    <div class="row justify-content-center ">
+<div class="container-fluid  mb-5">
+    <div class="row justify-content-center mb-5">
         <form method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
@@ -33,13 +33,13 @@
                         <div class="text-center mt-5">
                             <div id="photo">
                                 <span>Select File:</span>
-                                <input asp-for="House.Photos" type="file"  multiple />
+                                <input asp-for="House.Photos" type="file" multiple />
                                 <br />
                             </div>
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="text-center">
+                        <div class="text-center  mb-3">
                             <div id="house">
                                 <h2>House</h2>
                                 <div class="form-group">
@@ -104,7 +104,7 @@
                             <div id="floors">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="col-sm">
                         <div class="text-center ml-5">

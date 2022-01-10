@@ -5,5 +5,7 @@
     public interface IPlanService
     {
         Task<IEnumerable<PlanAllViewModel>> All();
+
+        Task<PlanDetailsViewModel> GetByHouseId(int houseId);
     }
 }

@@ -6,6 +6,8 @@ using HousePlans.Areas.Administration.Services.Plan;
 using HousePlans.Areas.Administration.Services.Room;
 using HousePlans.Data;
 using HousePlans.Data.Seeding;
+using HousePlans.Services.House;
+using HousePlans.Services.Instalation;
 using HousePlans.Services.Plan;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +32,8 @@ builder.Services.AddTransient<IInstalationAdministrationService, InstalationAdmi
 builder.Services.AddTransient<IPhotoAdministrationService, PhotoAdministrationService>();
 
 builder.Services.AddTransient<IPlanService, PlanService>();
+builder.Services.AddTransient<IHouseService, HouseService>();
+builder.Services.AddTransient<IInstalationService, InstalationService>();
 
 var app = builder.Build();
 

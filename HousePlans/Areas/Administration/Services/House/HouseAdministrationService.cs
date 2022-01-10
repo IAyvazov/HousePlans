@@ -50,7 +50,10 @@
 
         public async Task<HouseDetailsViewModel> Details(int houseId)
         {
-            var name = this.dbContext.Plans.Where(x => x.HouseId == houseId).Select(x => x.Name).FirstOrDefault();
+            var name = this.dbContext.Plans
+                .Where(x => x.HouseId == houseId)
+                .Select(x => x.Name)
+                .FirstOrDefault();
 
             var instalationId = this.dbContext.Plans
                 .Where(x => x.HouseId == houseId)

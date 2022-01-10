@@ -18,5 +18,12 @@
 
             return View(plans);
         }
+
+        public async Task<IActionResult> Details(int houseId)
+        {
+            var plansDetails = await this.planService.GetByHouseId(houseId);
+
+            return View(plansDetails);
+        }
     }
 }
