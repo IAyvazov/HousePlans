@@ -100,31 +100,32 @@
                             <div id="floors">
                                 @if (Model.House != null)
                                 {
+                                    var floorCount = 0;
                                     @foreach (var floor in Model.House.Floors)
                                     {
                                         <h2>Floor @floor.Number</h2>
                                         <div class="form-group">
-                                            <label asp-for="@floor.NumberOfRooms"></label>
-                                            <input asp-for="@floor.NumberOfRooms" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
-                                            <span asp-validation-for="@floor.NumberOfRooms" class="small text-danger"></span>
+                                            <label name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-for="@floor.NumberOfRooms" class="contro-label"></label>
+                                            <input name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-for="@floor.NumberOfRooms" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
+                                            <span name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-validation-for="@floor.NumberOfRooms" class="small text-danger"></span>
                                         </div>
-                                        var count = 1;
+                                        var roomCount = 0;
                                         foreach (var room in floor.Rooms)
                                         {
-                                            <h2>Room @count</h2>
+                                            <h2>Room @(roomCount+1)</h2>
                                             <div class="form-group">
-                                                <label asp-for="@room.Name"></label>
-                                                <input asp-for="@room.Name" type="text" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
-                                                <span asp-validation-for="@room.Name" class="small text-danger"></span>
+                                                <label name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-for="@room.Name" class="control-label"></label>
+                                                <input name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-for="@room.Name" type="text" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
+                                                <span name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-validation-for="@room.Name" class="small text-danger"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label asp-for="@room.Area"></label>
-                                                <input asp-for="@room.Area" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
-                                                <span asp-validation-for="@room.Area" class="small text-danger"></span>
+                                                <label name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-for="@room.Area" class="control-label"></label>
+                                                <input name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-for="@room.Area" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
+                                                <span name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-validation-for="@room.Area" class="small text-danger"></span>
                                             </div>
-
-                                            count++;
+                                            roomCount++;
                                         }
+                                        floorCount++;
                                     }
                                 }
                             </div>

@@ -6,6 +6,8 @@
     {
         Task<int> CreatePlan(PlanFormViewModel model);
 
+        Task<bool> Edit(PlanFormViewModel model, int planId);
+
         Task<PlanFormViewModel> GetById(int planId);
 
         Task<IEnumerable<PlanAllViewModel>> AllPlans();

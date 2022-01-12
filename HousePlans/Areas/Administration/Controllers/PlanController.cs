@@ -64,6 +64,22 @@
         }
 
         [Authorize(Roles = AdministratorRoleName)]
+        [HttpPost]
+        public async Task<IActionResult> Edit(PlanFormViewModel model, int planId)
+        {
+
+            var isEdited = await this.planService.Edit(model, planId);
+
+            if (!isEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
+
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Delete(int planId)
         {
             var isDeleted = await this.planService.Delete(planId);

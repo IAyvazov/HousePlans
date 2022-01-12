@@ -9,6 +9,8 @@ function addFields() {
 
     var floors = document.getElementById("floors");
 
+    floors.innerHTML = '';
+
     for (var i = 0; i < number; i++) {
 
         var h2 = document.createElement("h2");
@@ -26,7 +28,6 @@ function addFields() {
         inputNumber.setAttribute("name", `House.Floors[${i}].NumberOfRooms`);
         inputNumber.setAttribute("id", "numberOfRooms");
         inputNumber.setAttribute("type", "number");
-        inputNumber.setAttribute("step", "0.01");
         inputNumber.setAttribute("class", "form-control");
         inputNumber.addEventListener("change", addRoomFields);
 
@@ -49,11 +50,11 @@ function addRoomFields(e) {
 
     var rooms = e.target.parentNode.nextSibling;
 
+    rooms.innerHTML = '';
+
     var floorNumber = +rooms.id.replace("room", "");;
 
     for (var i = 0; i < number; i++) {
-
-
         var h2 = document.createElement("h2");
         h2.textContent = "Room " + (i + 1);
 
