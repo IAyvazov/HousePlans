@@ -108,7 +108,7 @@
             plan.Price = model.Price;
             plan.ModifiedOn = DateTime.UtcNow;
             plan.House.Area = model.House.Area;
-            plan.House.BuiltUpArea = model.House.BuiltUpArea;
+            plan.House.BuildUpArea = model.House.BuiltUpArea;
             plan.House.LengthOfThePlot = model.House.LengthOfThePlot;
             plan.House.WidthOfThePlot = model.House.WidthOfThePlot;
             plan.House.StepOfTheBuilding = model.House.StepOfTheBuilding;

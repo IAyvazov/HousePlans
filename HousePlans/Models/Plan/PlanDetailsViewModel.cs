@@ -1,5 +1,6 @@
 ﻿namespace HousePlans.Models.Plan
 {
+    using HousePlans.Models.Home;
     using HousePlans.Models.House;
     using HousePlans.Models.Instalation;
     using HousePlans.Models.Material;
@@ -17,5 +18,7 @@
         public InstalationDetailsViewModel Instalation { get; set; }
 
         public MaterialDetailsViewModel Material { get; set; }
+
+        public SearchModel Search { get; set; }
     }
 }

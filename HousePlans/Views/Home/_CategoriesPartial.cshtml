@@ -1,0 +1,34 @@
+﻿@model string[]
+
+<div class="row">
+    <div class="col-sm-4">
+        <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-toArea="80">
+            <div class="card">
+                <div class="card-body">
+                    <img src="@(Model.Length == 0? "" : Model[0])" class="d-block w-100" alt="@(Model.Length == 0? "" : Model[0])">
+                </div>
+                <p>До 80 кв.м.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-fromArea="80" asp-route-toArea="140">
+            <div class="card">
+                <div class="card-body">
+                    <img src="@(Model.Length == 0? "" : Model[1])" class="d-block w-100" alt="@(Model.Length == 0? "" : Model[1])">
+                </div>
+                <p>От 80 кв.м. до 140 кв.м</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-fromArea="140">
+            <div class="card ">
+                <div class="card-body">
+                    <img src="@(Model.Length == 0? "" : Model[2])" class="d-block w-100" alt="@(Model.Length == 0? "" : Model[2])">
+                </div>
+                <p>От 140 кв.м.</p>
+            </div>
+        </a>
+    </div>
+</div>

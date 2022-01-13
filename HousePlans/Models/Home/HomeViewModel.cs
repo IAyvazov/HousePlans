@@ -7,5 +7,8 @@
         public IEnumerable<PlanHomeViewModel> Plans { get; set; }
 
         public string[] Urls { get; set; }
+
+
+        public SearchModel Search { get; set; }
     }
 }

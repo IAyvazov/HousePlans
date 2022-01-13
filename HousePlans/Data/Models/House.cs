@@ -14,7 +14,7 @@
 
         public double Area { get; set; }
 
-        public double BuiltUpArea { get; set; }
+        public double BuildUpArea { get; set; }
 
         public double StepOfTheBuilding { get; set; }
 

@@ -42,7 +42,7 @@
             {
                 CreatedOn = DateTime.UtcNow,
                 Area = model.Area,
-                BuiltUpArea = model.BuiltUpArea,
+                BuildUpArea = model.BuiltUpArea,
                 LengthOfThePlot = model.LengthOfThePlot,
                 WidthOfThePlot = model.WidthOfThePlot,
                 StepOfTheBuilding = model.StepOfTheBuilding,
@@ -85,7 +85,7 @@
                        Id = x.Id,
                        Name = name,
                        Area = x.Area,
-                       BuiltUpArea = x.BuiltUpArea,
+                       BuiltUpArea = x.BuildUpArea,
                        CreatedOn = x.CreatedOn.ToString(),
                        LengthOfThePlot = x.LengthOfThePlot,
                        StepOfTheBuilding = x.StepOfTheBuilding,
@@ -134,7 +134,7 @@
                    .Select(x => new HouseFormVIewModel
                    {
                        Area = x.House.Area,
-                       BuiltUpArea = x.House.BuiltUpArea,
+                       BuiltUpArea = x.House.BuildUpArea,
                        LengthOfThePlot = x.House.LengthOfThePlot,
                        StepOfTheBuilding = x.House.StepOfTheBuilding,
                        WidthOfThePlot = x.House.WidthOfThePlot,
