@@ -3,6 +3,7 @@
     using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.Floor;
     using HousePlans.Areas.Administration.Models.Instalation;
+    using HousePlans.Areas.Administration.Models.Material;
     using HousePlans.Areas.Administration.Models.Photo;
 
     public class HouseDetailsViewModel
@@ -45,6 +46,8 @@
         public HashSet<FloorDetailsViewModel> Floors { get; set; }
 
         public InstalationDetailsViewModel Instalation { get; set; }
+
+        public MaterialDetailsViewModel Materials { get; set; }
 
         public HashSet<PhotoDetailsViewModel> Photos { get; set; }
     }

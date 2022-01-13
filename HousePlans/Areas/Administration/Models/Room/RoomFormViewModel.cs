@@ -2,11 +2,14 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using static GlobalConstant;
+
     public class RoomFormViewModel
     {
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Room name")]
+        [StringLength(NameMaxLength, ErrorMessage = ErrorMessage, MinimumLength = NameMinLength)]
         public string Name { get; set; }
 
         [DataType(DataType.Text)]

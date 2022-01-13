@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HousePlans.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220109120619_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220113120703_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,6 +179,47 @@ namespace HousePlans.Data.Migrations
                     b.ToTable("Instalations");
                 });
 
+            modelBuilder.Entity("HousePlans.Data.Models.Material", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OverlappingTypes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Technology")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypesOfRoof")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypesOfWalls")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Materials");
+                });
+
             modelBuilder.Entity("HousePlans.Data.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -236,6 +277,9 @@ namespace HousePlans.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -252,6 +296,9 @@ namespace HousePlans.Data.Migrations
                     b.HasIndex("HouseId");
 
                     b.HasIndex("InstalationId")
+                        .IsUnique();
+
+                    b.HasIndex("MaterialId")
                         .IsUnique();
 
                     b.ToTable("Plans");
@@ -532,9 +579,17 @@ namespace HousePlans.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HousePlans.Data.Models.Material", "Material")
+                        .WithOne("Plan")
+                        .HasForeignKey("HousePlans.Data.Models.Plan", "MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("House");
 
                     b.Navigation("Instalation");
+
+                    b.Navigation("Material");
                 });
 
             modelBuilder.Entity("HousePlans.Data.Models.Room", b =>
@@ -612,6 +667,12 @@ namespace HousePlans.Data.Migrations
                 });
 
             modelBuilder.Entity("HousePlans.Data.Models.Instalation", b =>
+                {
+                    b.Navigation("Plan")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HousePlans.Data.Models.Material", b =>
                 {
                     b.Navigation("Plan")
                         .IsRequired();

@@ -8,15 +8,15 @@
         <form method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm">
+                    <div class="col-sm text-center">
                         <div id="project">
-                            <h2>Add Project</h2>
-                            <div class="form-group">
+                            <h2>Project</h2>
+                            <div class="form-group mt-2">
                                 <label asp-for="Name"></label>
                                 <input asp-for="Name" class="form-control" placeholder="Enter project name" />
                                 <span asp-validation-for="Name" class="small text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 <label asp-for="Price"></label>
                                 <input asp-for="Price" type="number" step="0.01" class="form-control" placeholder="Enter project price">
                                 <span asp-validation-for="Price" class="small text-danger"></span>
@@ -24,6 +24,29 @@
                             <div class="form-check form-switch mt-3">
                                 <input asp-for="House.PassiveHouse" class="form-check-input" type="checkbox">
                                 <label asp-for="House.PassiveHouse" class="form-check-label">Passive House</label>
+                            </div>
+                        </div>
+                        <div id="material" class="mt-5 mb-5">
+                            <h2>Materials</h2>
+                            <div class="form-group mt-2">
+                                <label asp-for="House.Material.Technology"></label>
+                                <input asp-for="House.Material.Technology" class="form-control" placeholder="Enter project name" />
+                                <span asp-validation-for="House.Material.Technology" class="small text-danger"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="House.Material.OverlappingTypes"></label>
+                                <input asp-for="House.Material.OverlappingTypes" type="text" class="form-control" placeholder="Enter project price">
+                                <span asp-validation-for="House.Material.OverlappingTypes" class="small text-danger"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="House.Material.TypesOfRoof"></label>
+                                <input asp-for="House.Material.TypesOfRoof" class="form-control" placeholder="Enter project name" />
+                                <span asp-validation-for="House.Material.TypesOfRoof" class="small text-danger"></span>
+                            </div>
+                             <div class="form-group mt-2">
+                                <label asp-for="House.Material.TypesOfWalls"></label>
+                                <input asp-for="House.Material.TypesOfWalls" class="form-control" placeholder="Enter project name" />
+                                <span asp-validation-for="House.Material.TypesOfWalls" class="small text-danger"></span>
                             </div>
                         </div>
                         <div class="text-center mt-5">
@@ -35,63 +58,63 @@
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="text-center  mb-3">
+                        <div class="text-center mb-3">
                             <div id="house">
                                 <h2>House</h2>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.Area"></label>
                                     <input asp-for="House.Area" type="number" step="0.01" class="form-control" placeholder="Enter house area">
                                     <span asp-validation-for="House.Area" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.BuiltUpArea"></label>
                                     <input asp-for="House.BuiltUpArea" type="number" step="0.01" class="form-control" placeholder="Enter build up area">
                                     <span asp-validation-for="House.BuiltUpArea" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.StepOfTheBuilding"></label>
                                     <input asp-for="House.StepOfTheBuilding" type="number" step="0.01" class="form-control" placeholder="Enter step of the building">
                                     <span asp-validation-for="House.StepOfTheBuilding" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.LengthOfThePlot"></label>
                                     <input asp-for="House.LengthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter length of the plot">
                                     <span asp-validation-for="House.LengthOfThePlot" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.WidthOfThePlot"></label>
                                     <input asp-for="House.WidthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter width of the plot">
                                     <span asp-validation-for="House.WidthOfThePlot" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.Type" class="control-label"></label>
                                     <select asp-for="House.Type" class="form-control" asp-items="Html.GetEnumSelectList<HouseTypeFormViewModel>()">
                                         <option>Select type...</option>
                                     </select>
                                     <span asp-validation-for="House.Type" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.Style" class="control-label"></label>
                                     <select asp-for="House.Style" class="form-control" asp-items="Html.GetEnumSelectList<StyleFormViewModel>()">
                                         <option>Select style...</option>
                                     </select>
                                     <span asp-validation-for="House.Style" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.Roof" class="control-label"></label>
                                     <select asp-for="House.Roof" class="form-control" asp-items="Html.GetEnumSelectList<RoofFormVIewModel>()">
                                         <option>Select roof type...</option>
                                     </select>
                                     <span asp-validation-for="House.Roof" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.Garage" class="control-label"></label>
                                     <select asp-for="House.Garage" class="form-control" asp-items="Html.GetEnumSelectList<GarageFromViewModel>()">
                                         <option>Select garage type...</option>
                                     </select>
                                     <span asp-validation-for="House.Garage" class="small text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-2">
                                     <label asp-for="House.NumberOfFloors"></label>
                                     <input asp-for="House.NumberOfFloors" type="number" id="numberOfFloors" onchange="addFields()" class="form-control" placeholder="Enter floors number">
                                     <span asp-validation-for="House.NumberOfFloors" class="small text-danger"></span>
@@ -104,7 +127,7 @@
                                     @foreach (var floor in Model.House.Floors)
                                     {
                                         <h2>Floor @floor.Number</h2>
-                                        <div class="form-group">
+                                        <div class="form-group mt-2">
                                             <label name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-for="@floor.NumberOfRooms" class="contro-label"></label>
                                             <input name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-for="@floor.NumberOfRooms" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
                                             <span name=@($"House.Floors[{floorCount}].NumberOfRooms") asp-validation-for="@floor.NumberOfRooms" class="small text-danger"></span>
@@ -113,12 +136,12 @@
                                         foreach (var room in floor.Rooms)
                                         {
                                             <h2>Room @(roomCount+1)</h2>
-                                            <div class="form-group">
+                                            <div class="form-group mt-2">
                                                 <label name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-for="@room.Name" class="control-label"></label>
                                                 <input name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-for="@room.Name" type="text" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
                                                 <span name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Name") asp-validation-for="@room.Name" class="small text-danger"></span>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group mt-2">
                                                 <label name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-for="@room.Area" class="control-label"></label>
                                                 <input name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-for="@room.Area" type="number" id="numberOfFloors" class="form-control" placeholder="Enter floors number">
                                                 <span name=@($"House.Floors[{floorCount}].Rooms[{roomCount}].Area") asp-validation-for="@room.Area" class="small text-danger"></span>

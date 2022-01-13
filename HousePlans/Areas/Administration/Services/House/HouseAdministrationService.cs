@@ -7,6 +7,7 @@
     using HousePlans.Areas.Administration.Models.Room;
     using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.Instalation;
+    using HousePlans.Areas.Administration.Services.Material;
     using HousePlans.Data;
     using HousePlans.Data.Models;
     using HousePlans.Data.Models.Enums;
@@ -16,15 +17,18 @@
         private readonly ApplicationDbContext dbContext;
         private readonly IInstalationAdministrationService instalationService;
         private readonly IFloorAdministrationService floorService;
+        private readonly IMateialAdministrationService materialService;
 
         public HouseAdministrationService(
             ApplicationDbContext dbContext,
             IInstalationAdministrationService instalationService,
-            IFloorAdministrationService floorService)
+            IFloorAdministrationService floorService,
+            IMateialAdministrationService materialService)
         {
             this.dbContext = dbContext;
             this.instalationService = instalationService;
             this.floorService = floorService;
+            this.materialService = materialService;
         }
 
         public async Task<int> CreateHouse(HouseFormVIewModel model)
@@ -66,6 +70,13 @@
                 .Select(x => x.InstalationId)
                 .FirstOrDefault();
 
+            var materialId = this.dbContext.Plans
+                .Where(x => x.HouseId == houseId)
+                .Select(x => x.MaterialId)
+                .FirstOrDefault();
+
+            var material = await this.materialService.GetById(materialId);
+
             var instalations = await this.instalationService.GetById(instalationId);
 
             var house = this.dbContext.Houses.Where(x => x.Id == houseId)
@@ -99,6 +110,7 @@
                        })
                        .ToHashSet(),
                        Instalation = instalations,
+                       Materials = material,
                        Photos = x.Photos
                        .Select(x => new PhotoDetailsViewModel
                        {

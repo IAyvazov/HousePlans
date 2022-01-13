@@ -27,7 +27,7 @@
                     <div class="carousel-item" data-bs-interval="2000">
                         <img src="@Model.Plans.Select(x=>x.Url).Skip(1).FirstOrDefault()" class="d-block w-100" alt="@Model.Plans.Select(x=>x.Name).Skip(1).FirstOrDefault()">
                         <div class="carousel-caption d-none d-md-block">
-                            <a  asp-controller="Plan" asp-action="Details" asp-route-houseId="@Model.Plans.Select(x=>x.HouseId).Skip(1).FirstOrDefault()">
+                            <a asp-controller="Plan" asp-action="Details" asp-route-houseId="@Model.Plans.Select(x=>x.HouseId).Skip(1).FirstOrDefault()">
                                 <h5>@Model.Plans.Select(x=>x.Name).Skip(1).FirstOrDefault()</h5>
                             </a>
                             <p>Some representative placeholder content for the second slide.</p>
@@ -64,7 +64,7 @@
                         <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-toArea="80">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="@Model.Urls[0]" class="d-block w-100" alt="@Model.Urls[0]">
+                                    <img src="@(Model.Urls.Length == 0? "" : Model.Urls[0])" class="d-block w-100" alt="@(Model.Urls.Length == 0? "" : Model.Urls[0])">
                                 </div>
                                 <p>До 80 кв.м.</p>
                             </div>
@@ -74,7 +74,7 @@
                         <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-fromArea="80" asp-route-toArea="140">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="@Model.Urls[1]" class="d-block w-100" alt="@Model.Urls[1]">
+                                    <img src="@(Model.Urls.Length == 0? "" : Model.Urls[1])" class="d-block w-100" alt="@(Model.Urls.Length == 0? "" : Model.Urls[1])">
                                 </div>
                                 <p>От 80 кв.м. до 140 кв.м</p>
                             </div>
@@ -84,7 +84,7 @@
                         <a class="nounderline text-center" asp-controller="Plan" asp-action="Search" asp-route-fromArea="140">
                             <div class="card ">
                                 <div class="card-body">
-                                   <img src="@Model.Urls[2]" class="d-block w-100" alt="@Model.Urls[2]">
+                                    <img src="@(Model.Urls.Length == 0? "" : Model.Urls[2])" class="d-block w-100" alt="@(Model.Urls.Length == 0? "" : Model.Urls[2])">
                                 </div>
                                 <p>От 140 кв.м.</p>
                             </div>

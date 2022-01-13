@@ -2,6 +2,7 @@
 {
     using HousePlans.Models.House;
     using HousePlans.Models.Instalation;
+    using HousePlans.Models.Material;
 
     public class PlanDetailsViewModel
     {
@@ -14,5 +15,7 @@
         public HouseDetailsViewModel House { get; set; }
 
         public InstalationDetailsViewModel Instalation { get; set; }
+
+        public MaterialDetailsViewModel Material { get; set; }
     }
 }

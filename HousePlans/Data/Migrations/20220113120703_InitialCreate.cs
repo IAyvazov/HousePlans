@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
+﻿#nullable disable
 namespace HousePlans.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -102,6 +100,26 @@ namespace HousePlans.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Instalations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Materials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Technology = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TypesOfWalls = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OverlappingTypes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TypesOfRoof = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Materials", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,6 +286,7 @@ namespace HousePlans.Data.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     HouseId = table.Column<int>(type: "int", nullable: false),
                     InstalationId = table.Column<int>(type: "int", nullable: false),
+                    MaterialId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -286,6 +305,12 @@ namespace HousePlans.Data.Migrations
                         name: "FK_Plans_Instalations_InstalationId",
                         column: x => x.InstalationId,
                         principalTable: "Instalations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Plans_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -376,6 +401,12 @@ namespace HousePlans.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Plans_MaterialId",
+                table: "Plans",
+                column: "MaterialId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_FloorId",
                 table: "Rooms",
                 column: "FloorId");
@@ -415,6 +446,9 @@ namespace HousePlans.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Instalations");
+
+            migrationBuilder.DropTable(
+                name: "Materials");
 
             migrationBuilder.DropTable(
                 name: "Floors");

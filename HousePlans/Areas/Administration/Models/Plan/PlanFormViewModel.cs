@@ -10,7 +10,7 @@
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Project Name")]
-        [StringLength(Plan.NameMaxLength, ErrorMessage = Plan.ErrorMessage, MinimumLength = Plan.NameMinLength)]
+        [StringLength(NameMaxLength, ErrorMessage = ErrorMessage, MinimumLength = NameMinLength)]
         public string Name { get; set; }
 
         [DataType(DataType.Text)]

@@ -4,6 +4,7 @@
     using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.House;
     using HousePlans.Areas.Administration.Services.Instalation;
+    using HousePlans.Areas.Administration.Services.Material;
     using HousePlans.Areas.Administration.Services.Photo;
     using HousePlans.Data;
     using HousePlans.Data.Models;
@@ -17,19 +18,22 @@
         private readonly IHouseAdministrationService houseService;
         private readonly IInstalationAdministrationService instalationService;
         private readonly IPhotoAdministrationService photoService;
+        private readonly IMateialAdministrationService materialService;
 
         public PlanAdministrationService(
             ApplicationDbContext dbContext,
             IFloorAdministrationService floorService,
             IHouseAdministrationService houseService,
             IInstalationAdministrationService instalationService,
-            IPhotoAdministrationService photoService)
+            IPhotoAdministrationService photoService,
+            IMateialAdministrationService materialService)
         {
             this.dbContext = dbContext;
             this.floorService = floorService;
             this.houseService = houseService;
             this.instalationService = instalationService;
             this.photoService = photoService;
+            this.materialService = materialService;
         }
 
         public async Task<IEnumerable<PlanAllViewModel>> AllPlans()
@@ -67,6 +71,8 @@
 
             var instalationId = await this.instalationService.CreateInstalation(model.House.Instalation);
 
+            var materialId = await this.materialService.CreateMaterial(model.House.Material);
+
             if (instalationId == 0)
             {
                 return -1;
@@ -79,6 +85,7 @@
                 Price = model.Price,
                 HouseId = houseId,
                 InstalationId = instalationId,
+                MaterialId = materialId,
             };
 
             await this.dbContext.Plans.AddAsync(plan);

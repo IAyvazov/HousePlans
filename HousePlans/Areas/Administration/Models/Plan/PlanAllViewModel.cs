@@ -1,5 +1,6 @@
 ﻿namespace HousePlans.Areas.Administration.Models.Plan
 {
+
     public class PlanAllViewModel
     {
         public int Id { get; set; }

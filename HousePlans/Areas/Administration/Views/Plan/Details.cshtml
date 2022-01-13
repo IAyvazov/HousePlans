@@ -172,60 +172,20 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">Biomass</th>
-                                    <td>@(Model.Instalation.Biomass?"Yes":"No")</td>
+                                    <th scope="row">Technology</th>
+                                    <td>@Model.Materials.Technology</td>
+                                </tr>
+                               <tr>
+                                    <th scope="row">Overlapping Types</th>
+                                    <td>@Model.Materials.OverlappingTypes</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Chimney</th>
-                                    <td>@(Model.Instalation.Chimney?"Yes":"No")</td>
+                                    <th scope="row">Types Of Roof</th>
+                                    <td>@Model.Materials.TypesOfRoof</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Eco Pallet Coal</th>
-                                    <td>@(Model.Instalation.EcoPalletCoal?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Electrical</th>
-                                    <td>@(Model.Instalation.Electrical?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Energy Recovery Fan</th>
-                                    <td>@(Model.Instalation.EnergyRecoveryFan?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fireplace WJ</th>
-                                    <td>@(Model.Instalation.FireplaceWJ? "Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Floor Heating</th>
-                                    <td>@(Model.Instalation.FloorHeating?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Gas</th>
-                                    <td>@(Model.Instalation.Gas?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Heat Pump</th>
-                                    <td>@(Model.Instalation.HeatPump?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pellet Stove</th>
-                                    <td>@(Model.Instalation.PelletStove?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Petrol</th>
-                                    <td>@(Model.Instalation.Petrol?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Photovoltaic Panels For Electricity</th>
-                                    <td>@(Model.Instalation.PhotovoltaicPanelsForElectricity?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Solar Hot Water Systems</th>
-                                    <td>@(Model.Instalation.SolarHotWaterSystems?"Yes":"No")</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Solid Fuel</th>
-                                    <td>@(Model.Instalation.SolidFuel?"Yes":"No")</td>
+                                    <th scope="row">Types Of Walls</th>
+                                    <td>@Model.Materials.TypesOfWalls</td>
                                 </tr>
                             </tbody>
                         </table>

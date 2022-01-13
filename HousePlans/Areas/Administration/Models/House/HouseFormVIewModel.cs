@@ -4,6 +4,7 @@
     using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.Floor;
     using HousePlans.Areas.Administration.Models.Instalation;
+    using HousePlans.Areas.Administration.Models.Material;
     using HousePlans.Areas.Administration.Models.Photo;
 
     public class HouseFormVIewModel
@@ -50,6 +51,8 @@
         public StyleFormViewModel Style { get; set; }
 
         public int NumberOfFloors { get; set; } = 0;
+
+        public MaterialFormViewModel Material { get; set; }
 
         public HashSet<FloorFormViewModel> Floors { get; set; }
 

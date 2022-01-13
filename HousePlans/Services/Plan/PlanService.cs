@@ -5,21 +5,25 @@
     using HousePlans.Models.Plan;
     using HousePlans.Services.House;
     using HousePlans.Services.Instalation;
+    using HousePlans.Services.Material;
 
     public class PlanService : IPlanService
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IInstalationService instalationService;
         private readonly IHouseService houseService;
+        private readonly IMaterialService materialService;
 
         public PlanService(
             ApplicationDbContext dbContext,
             IInstalationService instalationService,
-            IHouseService houseService)
+            IHouseService houseService,
+            IMaterialService materialService)
         {
             this.dbContext = dbContext;
             this.instalationService = instalationService;
             this.houseService = houseService;
+            this.materialService = materialService;
         }
 
         public async Task<IEnumerable<PlanAllViewModel>> All()
@@ -42,6 +46,8 @@
 
             var instalation = await this.instalationService.GetByHouseId(houseId);
 
+            var material = await this.materialService.GetByHouseId(houseId);
+
             var plan = this.dbContext.Plans
                  .Where(x => x.HouseId == houseId && !x.IsDeleted)
                  .Select(x => new PlanDetailsViewModel
@@ -50,6 +56,7 @@
                      Price = x.Price,
                      Instalation = instalation,
                      House = house,
+                     Material= material,
                      CreatedOn = x.CreatedOn.ToString("g"),
                  })
                  .FirstOrDefault();
