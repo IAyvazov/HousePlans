@@ -1,8 +1,5 @@
 ﻿namespace HousePlans.Areas.Administration.Services.Plan
 {
-    using HousePlans.Areas.Administration.Models.Enums;
-    using HousePlans.Areas.Administration.Models.House;
-    using HousePlans.Areas.Administration.Models.Instalation;
     using HousePlans.Areas.Administration.Models.Plan;
     using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.House;
@@ -157,7 +154,6 @@
                 }
 
                 newFloor.Rooms = rooms;
-
                 floors.Add(newFloor);
             }
 

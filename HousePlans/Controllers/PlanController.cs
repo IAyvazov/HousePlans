@@ -25,5 +25,12 @@
 
             return View(plansDetails);
         }
+
+        public async Task<IActionResult> Search(int fromArea, int toArea)
+        {
+            var plans = await this.planService.Search(fromArea,toArea);
+
+            return View("All",plans);
+        }
     }
 }

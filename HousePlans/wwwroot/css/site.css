@@ -53,6 +53,9 @@ body {
     background: #eee;
 }
 
+.nounderline {
+    text-decoration: none !important
+}
 
 /*panel*/
 .panel {

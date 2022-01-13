@@ -1,25 +1,40 @@
 ﻿namespace HousePlans.Controllers
 {
     using HousePlans.Models;
+    using HousePlans.Services.Plan;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPlanService planService;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IPlanService planService)
         {
             _logger = logger;
+            this.planService = planService;
         }
 
         [HttpGet("/")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var home = await this.planService.HomeInfo();
+
+            return View(home);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Information()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }

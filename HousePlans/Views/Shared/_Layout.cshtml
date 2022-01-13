@@ -16,7 +16,8 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
+            <div class="container-fluid">
+                <a class="navbar-brand xx-large text-light ml-5" asp-controller="Home" asp-action="Index"><span class="h4">House Plans</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,25 +25,24 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="nav navbar-nav mx-auto flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link  xx-large" asp-controller="Home" asp-action="Index"><span class="h4">Home</span></a>
-                        </li>
+
                         <li class="nav-item dropdown">
-                            <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="h4">Projects</span>
                             </a>
                             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-light" asp-controller="Plan" asp-action="All">All</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
                                 <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Another action</a>
-                                <div class="dropdown-divider text-light"></div>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
                                 <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Something else here</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy"><span class="h4">Information</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Information"><span class="h4">Information</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Privacy"><span class="h4">Contacts</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact"><span class="h4">Contacts</span></a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
