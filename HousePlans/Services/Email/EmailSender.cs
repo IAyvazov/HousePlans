@@ -38,8 +38,10 @@
         {
             var emailMessage = new MimeMessage();
 
-            var mail = new List<MailboxAddress>();
-            mail.Add(new MailboxAddress(this.emailConfig.From));
+            var mail = new List<MailboxAddress>
+            {
+                new MailboxAddress(this.emailConfig.From)
+            };
 
             emailMessage.From.Add(message.To);
             emailMessage.To.AddRange(mail);

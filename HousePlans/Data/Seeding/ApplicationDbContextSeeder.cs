@@ -9,6 +9,13 @@
 
     public class ApplicationDbContextSeeder : ISeeder
     {
+        private readonly AdminConfiguration adminConfiguration;
+
+        public ApplicationDbContextSeeder(AdminConfiguration adminConfiguration)
+        {
+            this.adminConfiguration = adminConfiguration;
+        }
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
@@ -25,7 +32,7 @@
 
             var seeders = new List<ISeeder>
                           {
-                              new RolesSeeder(),
+                              new RolesSeeder(adminConfiguration),
                           };
 
             foreach (var seeder in seeders)

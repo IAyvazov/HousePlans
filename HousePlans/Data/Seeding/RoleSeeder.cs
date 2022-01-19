@@ -11,6 +11,12 @@
 
     internal class RolesSeeder : ISeeder
     {
+        private readonly AdminConfiguration adminConfiguration;
+
+        public RolesSeeder(AdminConfiguration adminConfiguration)
+        {
+            this.adminConfiguration = adminConfiguration;
+        }
 
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
@@ -18,10 +24,15 @@
 
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            await SeedRoleAsync(dbContext, roleManager, userManager, AdministratorRoleName);
+            await SeedRoleAsync(dbContext, roleManager, userManager,this.adminConfiguration ,AdministratorRoleName);
         }
 
-        private static async Task SeedRoleAsync(ApplicationDbContext dbContext, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, string roleName)
+        private static async Task SeedRoleAsync(
+            ApplicationDbContext dbContext,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<IdentityUser> userManager,
+            AdminConfiguration adminConfiguration,
+            string roleName)
         {
             var role = await roleManager.FindByNameAsync(roleName);
             if (role == null)
@@ -36,13 +47,13 @@
 
                 var user = new IdentityUser
                 {
-                    Email = "admin@admin.com",
-                    UserName = "admin@admin.com",
+                    Email = adminConfiguration.Email,
+                    UserName = adminConfiguration.UserName,
                 };
 
                 dbContext.Users.Add(user);
 
-                var adminPassword = "Admin123/";
+                var adminPassword = adminConfiguration.Password;
 
                 var userResult = await userManager.CreateAsync(user, adminPassword);
                
