@@ -16,6 +16,8 @@ using HousePlans.Areas.Administration.Services.Material;
 using HousePlans.Areas.Administration.Services.Photo;
 using HousePlans.Areas.Administration.Services.Plan;
 using HousePlans.Areas.Administration.Services.Room;
+using HousePlans.Data.Email;
+using HousePlans.Areas.Administration.Services.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
@@ -36,6 +44,7 @@ builder.Services.AddTransient<IHouseAdministrationService, HouseAdministrationSe
 builder.Services.AddTransient<IInstalationAdministrationService, InstalationAdministrationService>();
 builder.Services.AddTransient<IPhotoAdministrationService, PhotoAdministrationService>();
 builder.Services.AddTransient<IMateialAdministrationService, MaterialAdministrationService>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddTransient<IPlanService, PlanService>();
 builder.Services.AddTransient<IHouseService, HouseService>();

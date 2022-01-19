@@ -7,8 +7,12 @@
         [Required]
         public string Url { get; set; }
 
-        public int HouseId { get; set; }
+        public int? BuildingId { get; set; }
 
-        public House House { get; set; }
+        public Building Building { get; set; }
+
+        public int? PlanId { get; set; }
+
+        public Plan Plan { get; set; }
     }
 }

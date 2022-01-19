@@ -6,7 +6,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid">
+<div class="container-fluid text-dark mb-5">
     <div class="row justify-content-center ">
         <div class="col-8">
             <partial name="_CarouselPartial" model="@Model.Plans" />
@@ -18,7 +18,7 @@
                 <h3>Plans for Houses</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
             </div>
-            <partial name="_CategoriesPartial" model="@Model.Urls" />
+            <partial name="_AreaRangePartial" model="@Model.Urls" />
             <div class="text-left mt-3">
                 <h3>Changes in plans</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
@@ -36,7 +36,7 @@
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-4 ml-5">
             <partial name="_SearchPartial" model="@Model.Search"/>
         </div>
     </div>

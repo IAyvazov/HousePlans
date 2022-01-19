@@ -47,14 +47,14 @@ namespace HousePlans.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Houses",
+                name: "Buildings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Area = table.Column<double>(type: "float", nullable: false),
-                    BuiltUpArea = table.Column<double>(type: "float", nullable: false),
+                    BuildUpArea = table.Column<double>(type: "float", nullable: false),
                     StepOfTheBuilding = table.Column<double>(type: "float", nullable: false),
                     LengthOfThePlot = table.Column<double>(type: "float", nullable: false),
                     WidthOfThePlot = table.Column<double>(type: "float", nullable: false),
@@ -69,7 +69,7 @@ namespace HousePlans.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Houses", x => x.Id);
+                    table.PrimaryKey("PK_Buildings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,9 +245,9 @@ namespace HousePlans.Data.Migrations
                 {
                     table.PrimaryKey("PK_Floors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Floors_Houses_HouseId",
+                        name: "FK_Floors_Buildings_HouseId",
                         column: x => x.HouseId,
-                        principalTable: "Houses",
+                        principalTable: "Buildings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -269,9 +269,9 @@ namespace HousePlans.Data.Migrations
                 {
                     table.PrimaryKey("PK_Photos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Photos_Houses_HouseId",
+                        name: "FK_Photos_Buildings_HouseId",
                         column: x => x.HouseId,
-                        principalTable: "Houses",
+                        principalTable: "Buildings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -284,9 +284,10 @@ namespace HousePlans.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    HouseId = table.Column<int>(type: "int", nullable: false),
+                    BuildingId = table.Column<int>(type: "int", nullable: false),
                     InstalationId = table.Column<int>(type: "int", nullable: false),
                     MaterialId = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -296,9 +297,9 @@ namespace HousePlans.Data.Migrations
                 {
                     table.PrimaryKey("PK_Plans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Plans_Houses_HouseId",
-                        column: x => x.HouseId,
-                        principalTable: "Houses",
+                        name: "FK_Plans_Buildings_BuildingId",
+                        column: x => x.BuildingId,
+                        principalTable: "Buildings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -390,9 +391,9 @@ namespace HousePlans.Data.Migrations
                 column: "HouseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plans_HouseId",
+                name: "IX_Plans_BuildingId",
                 table: "Plans",
-                column: "HouseId");
+                column: "BuildingId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Plans_InstalationId",
@@ -454,7 +455,7 @@ namespace HousePlans.Data.Migrations
                 name: "Floors");
 
             migrationBuilder.DropTable(
-                name: "Houses");
+                name: "Buildings");
         }
     }
 }

@@ -2,9 +2,9 @@
 {
     using HousePlans.Data.Models.Enums;
 
-    public class House : BaseModel<int>
+    public class Building : BaseModel<int>
     {
-        public House()
+        public Building()
         {
             this.Floors = new HashSet<Floor>();
             this.Photos = new HashSet<Photo>();

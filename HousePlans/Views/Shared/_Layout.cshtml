@@ -15,9 +15,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand xx-large text-light ml-5" asp-controller="Home" asp-action="Index"><span class="h4">House Plans</span></a>
+        <nav class="navbar navbar-expand-lg mb-5">
+            <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,24 +24,29 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="nav navbar-nav mx-auto flex-grow-1">
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="h4">Projects</span>
+                                <span class="h4">Проекти</span>
                             </a>
                             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="All">All</a>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Residential">Жилищни сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Another action</a>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Administrative">Административни сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Home" asp-action="Privacy">Something else here</a>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Industrial">Промишлени сгради</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Typical">Типови проекти</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Execution">Интериорен дизайн</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Execution">Изпълнение</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Information"><span class="h4">Information</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Information"><span class="h4">Информация</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Contact"><span class="h4">Contacts</span></a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Contact"><span class="h4">Контакти</span></a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -55,18 +59,19 @@
                         }
                     </ul>
                     <ul class="nav navbar-nav pull-left flex-grow-1">
-                        @if (User != null)
-                        {
-                            <li class="nav-item">
-                                @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @this.User.Identity.Name</a>*@
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Profile">@this.User.Identity.Name </a>
-                            </li>
-                        }
-
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fa fa-home fa-fw fa-2x" aria-hidden="true"></i>
+                                <span class="h4">
+                                    House Plan
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -74,9 +79,49 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-dark">
-        <div class="container">
-            &copy; 2022 - House Plans - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer>
+        <div class="jumbotron jumbotron-fluid bg-secondary p-4 mt-5 mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 cizgi">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-light text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">House Plans</h5>
+                                <p class="d-inline lead">
+                                    House plans © 2022<br>
+                                    <a href="#" class="text-light d-block lead">Blog</a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">Контакти</h5>
+                                <a class="text-light d-block lead" style="margin-left: -20px" href="#"><i class="fa fa-phone mr-4"></i> +359897025221</a>
+                                <a class="text-light d-block lead" href="#"><i class="fa fa-envelope mr-4"></i> admin@admin.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="card bg-secondary border-0">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-white display-4" style="font-size:30px">Social Media</h5>
+
+                                <a class="text-light" href="#"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-twitter-square fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-instagram fa-fw fa-2x"></i></a>
+
+                                <a class="text-light" href="#"><i class="fa fa-linkedin fa-fw fa-2x"></i></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

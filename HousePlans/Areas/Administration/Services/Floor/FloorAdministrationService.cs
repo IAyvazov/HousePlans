@@ -45,7 +45,7 @@
         {
             var floors = this.dbContext.Plans
                 .Where(x => x.Id == planId)
-                .Select(x => x.House.Floors
+                .Select(x => x.Building.Floors
                 .Select(x => new FloorFormViewModel
                 {
                     Number = x.Number,

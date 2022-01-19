@@ -8,9 +8,6 @@
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "House Type")]
-        public HouseTypeFormViewModel HouseType { get; set; }
-
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 
@@ -30,16 +27,16 @@
         public int NumberOfFloors { get; set; }
 
         [Display(Name = "Number of rooms")]
-        public string NumberOfRooms { get; set; }
+        public int NumberOfRooms { get; set; }
 
-        [Display(Name = "Size of the plot")]
-        public double SizeOfThePlot { get; set; }
+        [Display(Name = "House Type")]
+        public HouseTypeFormViewModel HouseType { get; set; }
        
         [Display(Name = "Garage type")]
-        public GarageFromViewModel GarageType { get; set; }
+        public GarageFormViewModel GarageType { get; set; }
 
         [Display(Name = "House style")]
-        public StyleFormViewModel HouseStyle { get; set; }
+        public StyleFormViewModel Style { get; set; }
 
         [Display(Name = "Roof type")]
         public RoofFormVIewModel RoofType { get; set; }

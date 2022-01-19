@@ -34,7 +34,7 @@
                 return Redirect("/Error");
             }
 
-            var id = await this.planService.CreatePlan(model);
+           await this.planService.CreatePlan(model);
 
             return Redirect("/");
         }
@@ -67,7 +67,6 @@
         [HttpPost]
         public async Task<IActionResult> Edit(PlanFormViewModel model, int planId)
         {
-
             var isEdited = await this.planService.Edit(model, planId);
 
             if (!isEdited)

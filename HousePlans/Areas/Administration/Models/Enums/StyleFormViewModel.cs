@@ -1,8 +1,12 @@
 ﻿namespace HousePlans.Areas.Administration.Models.Enums
 {
     using System.ComponentModel.DataAnnotations;
+
     public enum StyleFormViewModel
     {
+        [Display(Name = "None")]
+        None = 0,
+
         [Display(Name = "Modern")]
         Modern = 0,
 

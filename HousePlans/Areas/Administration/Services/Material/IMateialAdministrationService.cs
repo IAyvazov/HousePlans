@@ -7,5 +7,7 @@
         Task<int> CreateMaterial(MaterialFormViewModel model);
 
         Task<MaterialDetailsViewModel> GetById(int materialId);
+
+        Task<MaterialFormViewModel> GetByPlanId(int planId);
     }
 }

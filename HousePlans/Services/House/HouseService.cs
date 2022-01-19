@@ -19,7 +19,7 @@
         public async Task<HouseDetailsViewModel> GetById(int houseId)
         {
 
-            var house = this.dbContext.Houses.Where(x => x.Id == houseId && !x.IsDeleted)
+            var house = this.dbContext.Buildings.Where(x => x.Id == houseId && !x.IsDeleted)
                    .Select(x => new HouseDetailsViewModel
                    {
                        Id = x.Id,
@@ -33,7 +33,7 @@
                        Roof = (RoofFormVIewModel)Enum.Parse<RoofFormVIewModel>(x.Roof.ToString()),
                        Style = (StyleFormViewModel)Enum.Parse<StyleFormViewModel>(x.Style.ToString()),
                        Type = (HouseTypeFormViewModel)Enum.Parse<HouseTypeFormViewModel>(x.Type.ToString()),
-                       Garage = (GarageFromViewModel)Enum.Parse<GarageFromViewModel>(x.Garage.ToString()),
+                       Garage = (GarageFormViewModel)Enum.Parse<GarageFormViewModel>(x.Garage.ToString()),
                        PassiveHouse = x.PassiveHouse,
                        Floors = x.Floors
                        .Select(x => new FloorDetailsViewModel

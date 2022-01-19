@@ -3,19 +3,19 @@
 
 @model SearchModel
 
-<form method="post" enctype="multipart/form-data">
-    <div class="row gutters">
+<form method="post">
+    <div class="row gutters ml-5 text-center">
         <div class="col-xl-12 col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
+            <div class="card h-100 form">
                 <div class="card-body">
                     <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h2 class="mb-3 text-dark text-cent">Search Details</h2>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                            <h2 class="mb-3 text-dark ">Search</h2>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
                                 <label asp-for="Name"></label>
-                                <input asp-for="Name" type="text" class="form-control" placeholder="Enter project price">
+                                <input asp-for="Name" type="text" class="form-control" placeholder="Enter project name">
                                 <span asp-validation-for="Name" class="small text-danger"></span>
                             </div>
                         </div>
@@ -27,29 +27,22 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-check form-switch mt-3">
-                                <input asp-for="IsPasive" class="form-check-input" type="checkbox">
-                                <label asp-for="IsPasive" class="form-check-label">Passive House</label>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
                                 <label asp-for="BuildUpArea"></label>
                                 <input asp-for="BuildUpArea" type="number" step="0.01" class="form-control" placeholder="Enter build up area">
                                 <span asp-validation-for="BuildUpArea" class="small text-danger"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
-                                <label asp-for="StepOfTheBuilding"></label>
-                                <input asp-for="StepOfTheBuilding" type="number" step="0.01" class="form-control" placeholder="Enter step of the building">
-                                <span asp-validation-for="StepOfTheBuilding" class="small text-danger"></span>
+                                <label asp-for="WidthOfThePlot"></label>
+                                <input asp-for="WidthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter width of the plot">
+                                <span asp-validation-for="WidthOfThePlot" class="small text-danger"></span>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row gutters">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
                                 <label asp-for="StepOfTheBuilding"></label>
@@ -65,16 +58,13 @@
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group mt-2">
-                                <label asp-for="WidthOfThePlot"></label>
-                                <input asp-for="WidthOfThePlot" type="number" step="0.01" class="form-control" placeholder="Enter width of the plot">
-                                <span asp-validation-for="WidthOfThePlot" class="small text-danger"></span>
+                            <div class="form-check form-switch mt-3 text-dark">
+                                <input asp-for="IsPasive" class="form-check-input" type="checkbox">
+                                <label asp-for="IsPasive" class="form-check-label">Passive House</label>
                             </div>
                         </div>
                     </div>
                     <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
                                 <label asp-for="HouseType" class="control-label"></label>
@@ -86,8 +76,8 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
-                                <label asp-for="HouseType" class="control-label"></label>
-                                <select asp-for="HouseType" class="form-control" asp-items="Html.GetEnumSelectList<HouseTypeFormViewModel>()">
+                                <label asp-for="GarageType" class="control-label"></label>
+                                <select asp-for="GarageType" class="form-control" asp-items="Html.GetEnumSelectList<HouseTypeFormViewModel>()">
                                     <option>Select type...</option>
                                 </select>
                                 <span asp-validation-for="HouseType" class="small text-danger"></span>
@@ -95,11 +85,11 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
-                                <label asp-for="HouseStyle" class="control-label"></label>
-                                <select asp-for="HouseStyle" class="form-control" asp-items="Html.GetEnumSelectList<StyleFormViewModel>()">
+                                <label asp-for="Style" class="control-label"></label>
+                                <select asp-for="Style" class="form-control" asp-items="Html.GetEnumSelectList<StyleFormViewModel>()">
                                     <option>Select style...</option>
                                 </select>
-                                <span asp-validation-for="HouseStyle" class="small text-danger"></span>
+                                <span asp-validation-for="HouseType" class="small text-danger"></span>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -117,27 +107,24 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group mt-2">
-                                <label asp-for="GarageType" class="control-label"></label>
-                                <select asp-for="GarageType" class="form-control" asp-items="Html.GetEnumSelectList<GarageFromViewModel>()">
-                                    <option>Select garage type...</option>
-                                </select>
-                                <span asp-validation-for="GarageType" class="small text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-
-                            <div class="form-group mt-2">
                                 <label asp-for="NumberOfFloors"></label>
                                 <input asp-for="NumberOfFloors" type="number" class="form-control" placeholder="Enter floors number">
                                 <span asp-validation-for="NumberOfFloors" class="small text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group mt-2">
+                                <label asp-for="NumberOfRooms"></label>
+                                <input asp-for="NumberOfRooms" type="number" class="form-control" placeholder="Enter room number">
+                                <span asp-validation-for="NumberOfRooms" class="small text-danger"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-5">
                             <div class="text-right">
-                                <button type="button" id="submit" name="submit" class="btn btn-secondary">Search</button>
-                                <button type="button" id="submit" name="submit" class="btn btn-primary">More Info</button>
+                                <button type="submit" id="submit" name="submit" class="btn btn-secondary">Search</button>
+                                <button type="submit" id="submit" name="submit" class="btn btn-primary">More Info</button>
                             </div>
                         </div>
                     </div>

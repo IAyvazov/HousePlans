@@ -32,7 +32,7 @@ namespace HousePlans.Models.House
 
         public HouseTypeFormViewModel Type { get; set; }
 
-        public GarageFromViewModel Garage { get; set; }
+        public GarageFormViewModel Garage { get; set; }
 
         public RoofFormVIewModel Roof { get; set; }
 

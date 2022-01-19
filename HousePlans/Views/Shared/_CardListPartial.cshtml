@@ -1,0 +1,22 @@
+﻿@using HousePlans.Models.Plan
+
+@model IEnumerable<PlanAllViewModel>
+
+ @foreach (var plan in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-12 mt-5">
+                    <div class="card">
+                        <div class="file">
+                            <a asp-controller="Plan" asp-action="Details" asp-route-houseId="@plan.HouseId">
+                                <div class="image">
+                                    <img src="@plan.PictureUrl" alt="img" class="img-fluid">
+                                </div>
+                                <div class="file-name">
+                                    <p class="m-b-5 text-muted">@plan.Name</p>
+                                    <small>Price: @plan.Price лв. <span class="date text-muted">@plan.CreatedOn</span></small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }

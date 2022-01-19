@@ -3,6 +3,7 @@
     using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.Floor;
     using HousePlans.Areas.Administration.Models.House;
+    using HousePlans.Areas.Administration.Models.Material;
     using HousePlans.Areas.Administration.Models.Photo;
     using HousePlans.Areas.Administration.Models.Room;
     using HousePlans.Areas.Administration.Services.Floor;
@@ -38,7 +39,7 @@
             string style = model.Style.ToString();
             string type = model.Type.ToString();
 
-            var house = new House
+            var house = new Building
             {
                 CreatedOn = DateTime.UtcNow,
                 Area = model.Area,
@@ -52,7 +53,7 @@
                 Type = (HouseType)Enum.Parse(typeof(HouseType), type),
             };
 
-            await this.dbContext.Houses.AddAsync(house);
+            await this.dbContext.Buildings.AddAsync(house);
             await this.dbContext.SaveChangesAsync();
 
             return house.Id;
@@ -61,17 +62,17 @@
         public async Task<HouseDetailsViewModel> Details(int houseId)
         {
             var name = this.dbContext.Plans
-                .Where(x => x.HouseId == houseId)
+                .Where(x => x.BuildingId == houseId)
                 .Select(x => x.Name)
                 .FirstOrDefault();
 
             var instalationId = this.dbContext.Plans
-                .Where(x => x.HouseId == houseId)
+                .Where(x => x.BuildingId == houseId)
                 .Select(x => x.InstalationId)
                 .FirstOrDefault();
 
             var materialId = this.dbContext.Plans
-                .Where(x => x.HouseId == houseId)
+                .Where(x => x.BuildingId == houseId)
                 .Select(x => x.MaterialId)
                 .FirstOrDefault();
 
@@ -79,7 +80,7 @@
 
             var instalations = await this.instalationService.GetById(instalationId);
 
-            var house = this.dbContext.Houses.Where(x => x.Id == houseId)
+            var house = this.dbContext.Buildings.Where(x => x.Id == houseId)
                    .Select(x => new HouseDetailsViewModel
                    {
                        Id = x.Id,
@@ -94,7 +95,7 @@
                        Roof = (RoofFormVIewModel)Enum.Parse<RoofFormVIewModel>(x.Roof.ToString()),
                        Style = (StyleFormViewModel)Enum.Parse<StyleFormViewModel>(x.Style.ToString()),
                        Type = (HouseTypeFormViewModel)Enum.Parse<HouseTypeFormViewModel>(x.Type.ToString()),
-                       Garage = (GarageFromViewModel)Enum.Parse<GarageFromViewModel>(x.Garage.ToString()),
+                       Garage = (GarageFormViewModel)Enum.Parse<GarageFormViewModel>(x.Garage.ToString()),
                        PassiveHouse = x.PassiveHouse,
                        Floors = x.Floors
                        .Select(x => new FloorDetailsViewModel
@@ -127,25 +128,28 @@
         {
             var instalation = await this.instalationService.GetByPlanId(planId);
 
+            var material = await this.materialService.GetByPlanId(planId);
+
             var floor = await this.floorService.GetByPlanId(planId);
 
             var house = this.dbContext.Plans
                    .Where(x => x.Id == planId)
                    .Select(x => new HouseFormVIewModel
                    {
-                       Area = x.House.Area,
-                       BuiltUpArea = x.House.BuildUpArea,
-                       LengthOfThePlot = x.House.LengthOfThePlot,
-                       StepOfTheBuilding = x.House.StepOfTheBuilding,
-                       WidthOfThePlot = x.House.WidthOfThePlot,
-                       NumberOfFloors = x.House.Floors.Count(),
-                       PassiveHouse = x.House.PassiveHouse,
-                       Garage = (GarageFromViewModel)x.House.Garage,
-                       Roof = (RoofFormVIewModel)x.House.Roof,
-                       Style = (StyleFormViewModel)x.House.Style,
-                       Type = (HouseTypeFormViewModel)x.House.Type,
+                       Area = x.Building.Area,
+                       BuiltUpArea = x.Building.BuildUpArea,
+                       LengthOfThePlot = x.Building.LengthOfThePlot,
+                       StepOfTheBuilding = x.Building.StepOfTheBuilding,
+                       WidthOfThePlot = x.Building.WidthOfThePlot,
+                       NumberOfFloors = x.Building.Floors.Count(),
+                       PassiveHouse = x.Building.PassiveHouse,
+                       Garage = (GarageFormViewModel)x.Building.Garage,
+                       Roof = (RoofFormVIewModel)x.Building.Roof,
+                       Style = (StyleFormViewModel)x.Building.Style,
+                       Type = (HouseTypeFormViewModel)x.Building.Type,
                        Instalation = instalation,
                        Floors = floor.ToHashSet(),
+                       Material = material,
                    })
                    .FirstOrDefault();
 

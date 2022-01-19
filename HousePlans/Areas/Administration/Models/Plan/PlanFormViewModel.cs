@@ -1,5 +1,6 @@
 ﻿namespace HousePlans.Areas.Administration.Models.Plan
 {
+    using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.House;
     using System.ComponentModel.DataAnnotations;
 
@@ -18,6 +19,11 @@
         [Range(0, int.MaxValue)]
         public decimal Price { get; set; }
 
+        [Display(Name = "Category")]
+        public CategoryFormViewModel Category { get; set; }
+
         public HouseFormVIewModel House { get; set; }
+
+        public List<IFormFile> Photos { get; set; }
     }
 }

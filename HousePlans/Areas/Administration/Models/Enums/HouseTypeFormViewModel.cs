@@ -4,6 +4,9 @@
     
     public enum HouseTypeFormViewModel
     {
+        [Display(Name = "None")]
+        None = 0,
+
         [Display(Name = "House")]
         House = 0,
 

@@ -46,5 +46,20 @@
 
             return material;
         }
+
+        public async Task<MaterialFormViewModel> GetByPlanId(int planId)
+        {
+            var material =  this.dbContext.Materials.Where(x => x.Plan.Id == planId && !x.IsDeleted)
+                         .Select(x => new MaterialFormViewModel
+                         {
+                             OverlappingTypes = x.OverlappingTypes,
+                             Technology = x.Technology,
+                             TypesOfRoof = x.TypesOfRoof,
+                             TypesOfWalls = x.TypesOfWalls
+                         })
+                         .FirstOrDefault();
+
+            return material;
+        }
     }
 }

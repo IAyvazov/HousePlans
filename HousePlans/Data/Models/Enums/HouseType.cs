@@ -2,9 +2,10 @@
 {
     public enum HouseType
     {
-        House=0,
-        DoubleHouse=1,
-        Office=2,
-        GuestHouse=3,
+        None = 0,
+        House = 1,
+        DoubleHouse=2,
+        Office=3,
+        GuestHouse=4,
     }
 }

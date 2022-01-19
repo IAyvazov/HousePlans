@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HousePlans.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220113171428_ChangeColumnName")]
-    partial class ChangeColumnName
+    [Migration("20220117172542_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,40 +24,7 @@ namespace HousePlans.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("HouseId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HouseId");
-
-                    b.ToTable("Floors");
-                });
-
-            modelBuilder.Entity("HousePlans.Data.Models.House", b =>
+            modelBuilder.Entity("HousePlans.Data.Models.Building", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +76,40 @@ namespace HousePlans.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Houses");
+                    b.ToTable("Buildings");
+                });
+
+            modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HouseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HouseId");
+
+                    b.ToTable("Floors");
                 });
 
             modelBuilder.Entity("HousePlans.Data.Models.Instalation", b =>
@@ -262,14 +262,17 @@ namespace HousePlans.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("HouseId")
-                        .HasColumnType("int");
 
                     b.Property<int>("InstalationId")
                         .HasColumnType("int");
@@ -293,7 +296,7 @@ namespace HousePlans.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseId");
+                    b.HasIndex("BuildingId");
 
                     b.HasIndex("InstalationId")
                         .IsUnique();
@@ -545,7 +548,7 @@ namespace HousePlans.Data.Migrations
 
             modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
                 {
-                    b.HasOne("HousePlans.Data.Models.House", "House")
+                    b.HasOne("HousePlans.Data.Models.Building", "House")
                         .WithMany("Floors")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -556,7 +559,7 @@ namespace HousePlans.Data.Migrations
 
             modelBuilder.Entity("HousePlans.Data.Models.Photo", b =>
                 {
-                    b.HasOne("HousePlans.Data.Models.House", "House")
+                    b.HasOne("HousePlans.Data.Models.Building", "House")
                         .WithMany("Photos")
                         .HasForeignKey("HouseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -567,9 +570,9 @@ namespace HousePlans.Data.Migrations
 
             modelBuilder.Entity("HousePlans.Data.Models.Plan", b =>
                 {
-                    b.HasOne("HousePlans.Data.Models.House", "House")
+                    b.HasOne("HousePlans.Data.Models.Building", "Building")
                         .WithMany()
-                        .HasForeignKey("HouseId")
+                        .HasForeignKey("BuildingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -585,7 +588,7 @@ namespace HousePlans.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("House");
+                    b.Navigation("Building");
 
                     b.Navigation("Instalation");
 
@@ -654,16 +657,16 @@ namespace HousePlans.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
-                {
-                    b.Navigation("Rooms");
-                });
-
-            modelBuilder.Entity("HousePlans.Data.Models.House", b =>
+            modelBuilder.Entity("HousePlans.Data.Models.Building", b =>
                 {
                     b.Navigation("Floors");
 
                     b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("HousePlans.Data.Models.Floor", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("HousePlans.Data.Models.Instalation", b =>

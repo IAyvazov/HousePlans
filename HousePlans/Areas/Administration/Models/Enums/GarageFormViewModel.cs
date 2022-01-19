@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum GarageFromViewModel
+    public enum GarageFormViewModel
     {
         [Display(Name = "None")]
         None = 0,

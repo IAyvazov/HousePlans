@@ -11,6 +11,7 @@
 
     internal class RolesSeeder : ISeeder
     {
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -31,6 +32,7 @@
                 {
                     throw new Exception(string.Join(Environment.NewLine, roleResult.Errors.Select(e => e.Description)));
                 }
+
 
                 var user = new IdentityUser
                 {

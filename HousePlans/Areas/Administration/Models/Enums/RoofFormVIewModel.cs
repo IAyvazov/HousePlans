@@ -4,6 +4,9 @@
 
     public enum RoofFormVIewModel
     {
+        [Display(Name = "None")]
+        None = 0,
+
         [Display(Name = "Villa")]
         Villa = 0,
 

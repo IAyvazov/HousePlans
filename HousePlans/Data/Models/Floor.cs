@@ -11,7 +11,7 @@
 
         public int HouseId { get; set; }
 
-        public House House { get; set; }
+        public Building House { get; set; }
 
         public IEnumerable<Room> Rooms { get; set; }
     }

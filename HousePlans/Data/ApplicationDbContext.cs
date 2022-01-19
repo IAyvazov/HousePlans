@@ -17,7 +17,7 @@
 
         public DbSet<Floor> Floors { get; set; }
 
-        public DbSet<House> Houses { get; set; }
+        public DbSet<Building> Buildings { get; set; }
 
         public DbSet<Plan> Plans { get; set; }
 

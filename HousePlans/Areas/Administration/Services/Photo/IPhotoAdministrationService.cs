@@ -2,6 +2,8 @@
 {
     public interface IPhotoAdministrationService
     {
-        Task Upload(IEnumerable<IFormFile> formFiles, int houseId);
+        Task UploadHousePhotos(IEnumerable<IFormFile> formFiles, int houseId);
+
+        Task UploadPlanPhotos(IEnumerable<IFormFile> formFiles, int planId);
     }
 }

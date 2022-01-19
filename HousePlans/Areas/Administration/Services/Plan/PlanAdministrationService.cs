@@ -1,5 +1,6 @@
 ﻿namespace HousePlans.Areas.Administration.Services.Plan
 {
+    using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Areas.Administration.Models.Plan;
     using HousePlans.Areas.Administration.Services.Floor;
     using HousePlans.Areas.Administration.Services.House;
@@ -45,7 +46,7 @@
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
-                    HouseId = p.HouseId,
+                    HouseId = p.BuildingId,
                     CreatedOn = p.CreatedOn.ToString("g"),
                     IsDeleted = p.IsDeleted,
                     DeletedOn = p.DeletedOn.ToString(),
@@ -67,7 +68,7 @@
             }
 
             await this.floorService.CreateFloor(model.House.Floors, houseId);
-            await this.photoService.Upload(model.House.Photos, houseId);
+            await this.photoService.UploadHousePhotos(model.House.Photos, houseId);
 
             var instalationId = await this.instalationService.CreateInstalation(model.House.Instalation);
 
@@ -83,13 +84,17 @@
                 CreatedOn = DateTime.UtcNow,
                 Name = model.Name,
                 Price = model.Price,
-                HouseId = houseId,
+                BuildingId = houseId,
                 InstalationId = instalationId,
                 MaterialId = materialId,
+                Category = (Category)model.Category,
             };
+
 
             await this.dbContext.Plans.AddAsync(plan);
             await this.dbContext.SaveChangesAsync();
+
+            await this.photoService.UploadPlanPhotos(model.Photos, plan.Id);
 
             return plan.Id;
         }
@@ -98,25 +103,26 @@
         {
             var plan = this.dbContext.Plans
                  .Where(x => x.Id == planId)
-                 .Include(x => x.House)
+                 .Include(x => x.Building)
                  .ThenInclude(x => x.Floors)
                  .ThenInclude(x => x.Rooms)
                  .Include(x => x.Instalation)
+                 .Include(x => x.Material)
                  .FirstOrDefault();
 
             plan.Name = model.Name;
             plan.Price = model.Price;
+            plan.Building.Area = model.House.Area;
+            plan.Building.BuildUpArea = model.House.BuiltUpArea;
+            plan.Building.LengthOfThePlot = model.House.LengthOfThePlot;
+            plan.Building.WidthOfThePlot = model.House.WidthOfThePlot;
+            plan.Building.StepOfTheBuilding = model.House.StepOfTheBuilding;
+            plan.Building.PassiveHouse = model.House.PassiveHouse;
+            plan.Building.Type = (HouseType)model.House.Type;
+            plan.Building.Garage = (Garage)model.House.Garage;
+            plan.Building.Roof = (Roof)model.House.Roof;
+            plan.Building.Style = (Style)model.House.Style;
             plan.ModifiedOn = DateTime.UtcNow;
-            plan.House.Area = model.House.Area;
-            plan.House.BuildUpArea = model.House.BuiltUpArea;
-            plan.House.LengthOfThePlot = model.House.LengthOfThePlot;
-            plan.House.WidthOfThePlot = model.House.WidthOfThePlot;
-            plan.House.StepOfTheBuilding = model.House.StepOfTheBuilding;
-            plan.House.PassiveHouse = model.House.PassiveHouse;
-            plan.House.Type = (HouseType)model.House.Type;
-            plan.House.Garage = (Garage)model.House.Garage;
-            plan.House.Roof = (Roof)model.House.Roof;
-            plan.House.Style = (Style)model.House.Style;
 
             plan.Instalation.Biomass = model.House.Instalation.Biomass;
             plan.Instalation.Gas = model.House.Instalation.Gas;
@@ -134,6 +140,14 @@
             plan.Instalation.SolidFuel = model.House.Instalation.SolidFuel;
             plan.Instalation.ModifiedOn = DateTime.UtcNow;
 
+            plan.Material.Technology = model.House.Material.Technology;
+            plan.Material.TypesOfRoof = model.House.Material.TypesOfRoof;
+            plan.Material.OverlappingTypes = model.House.Material.OverlappingTypes;
+            plan.Material.TypesOfWalls = model.House.Material.TypesOfWalls;
+            plan.Material.ModifiedOn = DateTime.UtcNow;
+
+            plan.Category = (Category)model.Category;
+
             var floors = new HashSet<Floor>();
 
             var count = 0;
@@ -143,7 +157,7 @@
 
                 var newFloor = new Floor
                 {
-                    HouseId = plan.HouseId,
+                    HouseId = plan.BuildingId,
                     Number = count++,
                     ModifiedOn = DateTime.UtcNow,
                 };
@@ -164,7 +178,7 @@
                 floors.Add(newFloor);
             }
 
-            plan.House.Floors = floors;
+            plan.Building.Floors = floors;
 
             await this.dbContext.SaveChangesAsync();
 
@@ -175,7 +189,7 @@
         {
             var plan = this.dbContext.Plans
                 .Where(x => x.Id == planId)
-                .Include(x => x.House)
+                .Include(x => x.Building)
                 .ThenInclude(x => x.Floors)
                 .ThenInclude(x => x.Rooms)
                 .Include(x => x.Instalation)
@@ -190,15 +204,15 @@
             plan.DeletedOn = DateTime.UtcNow;
             plan.ModifiedOn = DateTime.UtcNow;
 
-            plan.House.IsDeleted = true;
-            plan.House.DeletedOn = DateTime.UtcNow;
-            plan.House.ModifiedOn = DateTime.UtcNow;
+            plan.Building.IsDeleted = true;
+            plan.Building.DeletedOn = DateTime.UtcNow;
+            plan.Building.ModifiedOn = DateTime.UtcNow;
 
             plan.Instalation.IsDeleted = true;
             plan.Instalation.DeletedOn = DateTime.UtcNow;
             plan.Instalation.ModifiedOn = DateTime.UtcNow;
 
-            foreach (var floor in plan.House.Floors)
+            foreach (var floor in plan.Building.Floors)
             {
                 floor.IsDeleted = true;
                 floor.DeletedOn = DateTime.UtcNow;
@@ -221,7 +235,7 @@
         {
             var plan = this.dbContext.Plans
                 .Where(x => x.Id == planId)
-                .Include(x => x.House)
+                .Include(x => x.Building)
                 .ThenInclude(x => x.Floors)
                 .ThenInclude(x => x.Rooms)
                 .Include(x => x.Instalation)
@@ -235,13 +249,13 @@
             plan.IsDeleted = false;
             plan.ModifiedOn = DateTime.UtcNow;
 
-            plan.House.IsDeleted = false;
-            plan.House.ModifiedOn = DateTime.UtcNow;
+            plan.Building.IsDeleted = false;
+            plan.Building.ModifiedOn = DateTime.UtcNow;
 
             plan.Instalation.IsDeleted = false;
             plan.Instalation.ModifiedOn = DateTime.UtcNow;
 
-            foreach (var floor in plan.House.Floors)
+            foreach (var floor in plan.Building.Floors)
             {
                 floor.IsDeleted = false;
                 floor.ModifiedOn = DateTime.UtcNow;
@@ -269,6 +283,8 @@
                     Name = x.Name,
                     Price = x.Price,
                     House = house,
+                    Category = (CategoryFormViewModel)x.Category,
+
                 })
                 .FirstOrDefault();
 

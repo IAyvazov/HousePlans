@@ -14,7 +14,7 @@
 
         public async Task<InstalationDetailsViewModel> GetByHouseId(int houseId)
         => this.dbContext.Instalations
-                  .Where(x => x.Plan.HouseId == houseId)
+                  .Where(x => x.Plan.BuildingId == houseId)
                   .Select(x => new InstalationDetailsViewModel
                   {
                       Biomass = x.Biomass,

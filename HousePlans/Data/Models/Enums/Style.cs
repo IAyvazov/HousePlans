@@ -2,9 +2,10 @@
 {
     public enum Style
     {
-        Modern=0,
-        Classic=1,
-        Contemporary=2,
-        OldPolish=3,
+        None = 0,
+        Modern = 1,
+        Classic = 2,
+        Contemporary = 3,
+        OldPolish = 4,
     }
 }

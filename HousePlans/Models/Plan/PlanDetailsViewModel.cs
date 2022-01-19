@@ -4,6 +4,7 @@
     using HousePlans.Models.House;
     using HousePlans.Models.Instalation;
     using HousePlans.Models.Material;
+    using HousePlans.Models.Photo;
 
     public class PlanDetailsViewModel
     {
@@ -20,5 +21,7 @@
         public MaterialDetailsViewModel Material { get; set; }
 
         public SearchModel Search { get; set; }
+
+        public HashSet<PhotoDetailsViewModel> Photos { get; set; }
     }
 }

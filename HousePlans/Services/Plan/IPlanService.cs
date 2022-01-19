@@ -7,10 +7,14 @@
     {
         Task<IEnumerable<PlanAllViewModel>> All();
 
+        Task<IEnumerable<PlanAllViewModel>> All(string categoryType);
+
         Task<PlanDetailsViewModel> GetByHouseId(int houseId);
 
-        Task<IEnumerable<PlanAllViewModel>> Search(int fromArea, int toArea);
+        Task<IEnumerable<PlanAllViewModel>> AreaRange(int fromArea, int toArea);
 
         Task<HomeViewModel> HomeInfo();
+
+        Task<IEnumerable<PlanAllViewModel>> Search(SearchModel searchModel);
     }
 }
