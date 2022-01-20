@@ -326,6 +326,18 @@ body {
     background-color: #484848;
 }
 
+.dropdown-menu {
+    background-color: #484848;
+}
+
+    .dropdown-menu .dropdown-item {
+        color: #fff;
+    }
+
+        .dropdown-menu .dropdown-item:hover {
+            color:black;
+        }
+
 .navbar .navbar-nav .nav-link {
     color: #fff;
 }

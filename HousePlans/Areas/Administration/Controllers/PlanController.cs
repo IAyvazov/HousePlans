@@ -31,7 +31,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return Redirect("/Error");
+                return View(model);
             }
 
            await this.planService.CreatePlan(model);
@@ -67,6 +67,11 @@
         [HttpPost]
         public async Task<IActionResult> Edit(PlanFormViewModel model, int planId)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var isEdited = await this.planService.Edit(model, planId);
 
             if (!isEdited)

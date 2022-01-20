@@ -1,7 +1,7 @@
 ﻿namespace HousePlans.Services.Plan
 {
-    using HousePlans.Areas.Administration.Models.Enums;
     using HousePlans.Data;
+    using HousePlans.Data.Models;
     using HousePlans.Data.Models.Enums;
     using HousePlans.Models.Home;
     using HousePlans.Models.Photo;
@@ -9,6 +9,7 @@
     using HousePlans.Services.House;
     using HousePlans.Services.Instalation;
     using HousePlans.Services.Material;
+    using Microsoft.EntityFrameworkCore;
 
     public class PlanService : IPlanService
     {
@@ -156,32 +157,127 @@
             Enum.TryParse<HouseType>(searchModel.HouseType.ToString(), out HouseType houseType);
 
             var plans = this.dbContext.Plans
-                .Where(x => !x.IsDeleted &&
-                (x.Name == searchModel.Name ||
-                x.Price == searchModel.Price ||
-                x.Building.BuildUpArea == searchModel.BuildUpArea ||
-                x.Building.LengthOfThePlot == searchModel.LengthOfThePlot ||
-                x.Building.StepOfTheBuilding == searchModel.StepOfTheBuilding ||
-                x.Building.WidthOfThePlot == searchModel.WidthOfThePlot ||
-                x.Building.Garage == garage ||
-                x.Building.Roof == roof ||
-                x.Building.Style == style ||
-                x.Building.Type == houseType ||
-                x.Building.PassiveHouse == searchModel.IsPasive ||
-                x.Building.Floors.Count() == searchModel.NumberOfFloors))
-                .Select(x => new PlanAllViewModel
-                {
-                    Name = x.Name,
-                    CreatedOn = x.CreatedOn.ToString("g"),
-                    HouseId = x.BuildingId,
-                    PictureUrl = x.Building.Photos
-                    .Select(x => x.Url)
-                    .FirstOrDefault(),
-                    Price = x.Price,
-                })
-                .ToList();
+                .Where(x => !x.IsDeleted)
+                .Include(x=>x.Building)
+                .ThenInclude(x=>x.Floors)
+                .ThenInclude(x=>x.Rooms);
 
-            return plans;
+            List<PlanAllViewModel> result = new();
+
+            if (!string.IsNullOrWhiteSpace(searchModel.Name))
+            {
+                var curr = plans
+                    .Where(x => x.Name == searchModel.Name);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.Price > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Price <= searchModel.Price);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.BuildUpArea > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.BuildUpArea <= searchModel.BuildUpArea);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.LengthOfThePlot > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.LengthOfThePlot <= searchModel.LengthOfThePlot);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.StepOfTheBuilding > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.StepOfTheBuilding <= searchModel.StepOfTheBuilding);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.WidthOfThePlot > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.WidthOfThePlot <= searchModel.WidthOfThePlot);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.NumberOfFloors > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.Floors.Count() == searchModel.NumberOfFloors);
+
+                AddResult(result, curr);
+            }
+
+            if (searchModel.NumberOfRooms > 0)
+            {
+                var curr = plans
+                    .Where(x => x.Building.NumberOfRoom == searchModel.NumberOfRooms);
+
+                AddResult(result, curr);
+            }
+
+            if (garage.ToString() != "None")
+            {
+                var curr = plans
+                    .Where(x => x.Building.Garage == garage);
+
+                AddResult(result, curr);
+            }
+
+            if (roof.ToString() != "None")
+            {
+                var curr = plans
+                    .Where(x => x.Building.Roof == roof);
+
+                AddResult(result, curr);
+            }
+
+            if (style.ToString() != "None")
+            {
+                var curr = plans
+                    .Where(x => x.Building.Style == style);
+
+                AddResult(result, curr);
+            }
+
+            if (houseType.ToString() != "None")
+            {
+                var curr = plans
+                    .Where(x => x.Building.Type == houseType);
+
+                AddResult(result, curr);
+            }
+
+            return result;
+        }
+
+        private static void AddResult(List<PlanAllViewModel> result, IQueryable<Plan> plans)
+        {
+            var res = plans.Select(x => new PlanAllViewModel
+            {
+                Name = x.Name,
+                CreatedOn = x.CreatedOn.ToString("g"),
+                HouseId = x.BuildingId,
+                PictureUrl = x.Building.Photos
+                .Select(x => x.Url)
+                .FirstOrDefault(),
+                Price = x.Price,
+            })
+               .ToHashSet();
+
+            result.AddRange(res);
         }
     }
 }

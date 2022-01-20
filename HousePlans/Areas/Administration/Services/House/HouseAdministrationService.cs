@@ -51,6 +51,7 @@
                 Garage = (Garage)Enum.Parse(typeof(Garage), garage),
                 Style = (Style)Enum.Parse(typeof(Style), style),
                 Type = (HouseType)Enum.Parse(typeof(HouseType), type),
+                NumberOfRoom = model.Floors.Sum(x => x.Rooms.Count()),
             };
 
             await this.dbContext.Buildings.AddAsync(house);

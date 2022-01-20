@@ -22,24 +22,38 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
+
                     <ul class="nav navbar-nav mx-auto flex-grow-1">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="h4">Проекти</span>
                             </a>
-                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Residential">Жилищни сгради</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Residential">Жилищни сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Administrative">Административни сгради</a>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Administrative">Административни сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Industrial">Промишлени сгради</a>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Industrial">Индустриални сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Typical">Типови проекти</a>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Typical">Типови проекти</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Execution">Интериорен дизайн</a>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Execution">Интериорен дизайн</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="h4">Услуги</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Residential">Проектиране</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item text-light" asp-controller="Plan" asp-action="Execution">Изпълнение</a>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Residential">Архитектура</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Administrative">Интериор</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Industrial">3D визуализация</a>
+                                <div class="dropdown-divider" style="border-color:white;"></div>
+                                <a class="dropdown-item" asp-controller="Plan" asp-action="Typical">Контрол и организация на изпълнението</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -86,9 +100,11 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 cizgi">
                         <div class="card bg-secondary border-0">
                             <div class="card-body text-light text-center">
-                                <h5 class="card-title text-white display-4" style="font-size:30px">House Plans</h5>
+                                <a asp-controller="Home" asp-action="Index" class="nounderline">
+                                    <h5 class="card-title text-white display-4" style="font-size:30px">House Plans</h5>
+                                </a>
                                 <p class="d-inline lead">
-                                    House plans © 2022<br>
+                                    House plans © @DateTime.UtcNow.Year<br>
                                     <a href="#" class="text-light d-block lead">Blog</a>
                                 </p>
 
@@ -98,9 +114,11 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
                         <div class="card bg-secondary border-0">
                             <div class="card-body text-center">
-                                <h5 class="card-title text-white display-4" style="font-size:30px">Контакти</h5>
+                                <a asp-controller="Home" asp-action="Contact" class="nounderline">
+                                    <h5 class="card-title text-white display-4" style="font-size:30px">Контакти</h5>
+                                </a>
                                 <a class="text-light d-block lead" style="margin-left: -20px" href="#"><i class="fa fa-phone mr-4"></i> +359897025221</a>
-                                <a class="text-light d-block lead" href="#"><i class="fa fa-envelope mr-4"></i> admin@admin.com</a>
+                                <a class="text-light d-block lead" href="#"><i class="fa fa-envelope mr-4"></i> di.officeusa@gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -109,13 +127,13 @@
                             <div class="card-body text-center">
                                 <h5 class="card-title text-white display-4" style="font-size:30px">Social Media</h5>
 
-                                <a class="text-light" href="#"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>
+                                <a class="text-light" href="https://www.facebook.com/profile.php?id=100001042369733"><i class="fa fa-facebook-square fa-fw fa-2x"></i></a>
 
                                 <a class="text-light" href="#"><i class="fa fa-twitter-square fa-fw fa-2x"></i></a>
 
-                                <a class="text-light" href="#"><i class="fa fa-instagram fa-fw fa-2x"></i></a>
+                                <a class="text-light" href="https://www.instagram.com/ivoaivazov/"><i class="fa fa-instagram fa-fw fa-2x"></i></a>
 
-                                <a class="text-light" href="#"><i class="fa fa-linkedin fa-fw fa-2x"></i></a>
+                                <a class="text-light" href="https://www.linkedin.com/in/ivo-ayvazov-259277220/"><i class="fa fa-linkedin fa-fw fa-2x"></i></a>
 
                             </div>
                         </div>

@@ -49,6 +49,11 @@
         [HttpPost]
         public IActionResult Contact(EmailModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             this.emailSender.SendEmail(model);
 
             return Redirect(nameof(Contact));

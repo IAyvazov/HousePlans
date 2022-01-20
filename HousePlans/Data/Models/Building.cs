@@ -32,6 +32,8 @@
 
         public Style Style { get; set; }
 
+        public int NumberOfRoom { get; set; }
+
         public bool PassiveHouse { get; set; }
     }
 }
