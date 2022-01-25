@@ -2,6 +2,10 @@
 
 @model IEnumerable<PlanAllViewModel>
 
+@{
+    ViewData["Title"] = "Жилищни проекти";
+}
+
 <div class="file_manager text-center mb-5">
     <div class="mb-5 form">
         <h1 class="mt-5 mb-5">Жилищни сгради</h1>
@@ -17,14 +21,14 @@
         <div class="mb-5">
             <p>
                 <a asp-controller="Home" asp-action="Contact">
-                   Свържете се с нас
+                    За повече информация се свържете с нас
                 </a>
             </p>
         </div>
     </div>
     <div class="container d-flex justify-content-center">
         <div class="row clearfix">
-           <partial name="_CardListPartial" model="@Model" />
+            <partial name="_CardListPartial" model="@Model" />
         </div>
     </div>
 </div>

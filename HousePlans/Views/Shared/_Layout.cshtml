@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - House Plans</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HousePlans.styles.css" asp-append-version="true" />
@@ -24,7 +25,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 
                     <ul class="nav navbar-nav mx-auto flex-grow-1">
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ml-5">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="h4">Проекти</span>
                             </a>
@@ -36,30 +37,20 @@
                                 <a class="dropdown-item" asp-controller="Plan" asp-action="Industrial">Индустриални сгради</a>
                                 <div class="dropdown-divider" style="border-color:white;"></div>
                                 <a class="dropdown-item" asp-controller="Plan" asp-action="Typical">Типови проекти</a>
-                                <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Execution">Интериорен дизайн</a>
+                                @* <div class="dropdown-divider" style="border-color:white;"></div>
+                                    <a class="dropdown-item" asp-controller="Plan" asp-action="Execution">Интериорен дизайн</a>*@
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="h4">Услуги</span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Residential">Проектиране</a>
-                                <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Residential">Архитектура</a>
-                                <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Administrative">Интериор</a>
-                                <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Industrial">3D визуализация</a>
-                                <div class="dropdown-divider" style="border-color:white;"></div>
-                                <a class="dropdown-item" asp-controller="Plan" asp-action="Typical">Контрол и организация на изпълнението</a>
-                            </div>
+                        @* <li class="nav-item ml-5">
+                            <a class="nav-link" asp-controller="Home" asp-action="Information"><span class="h4">Изпълнение</span></a>
+                            </li>*@
+                        <li class="nav-item ml-5">
+                            <a class="nav-link" asp-controller="Home" asp-action="Price"><span class="h4">Цени</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ml-5">
                             <a class="nav-link" asp-controller="Home" asp-action="Information"><span class="h4">Информация</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ml-5">
                             <a class="nav-link" asp-controller="Home" asp-action="Contact"><span class="h4">Контакти</span></a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
@@ -75,8 +66,8 @@
                     <ul class="nav navbar-nav pull-left flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">
-                                <i class="fa fa-home fa-fw fa-2x" aria-hidden="true"></i>
                                 <span class="h4">
+                                    <img src="~/yellow-home-icon.png" alt="Home icon" />
                                     House Plan
                                 </span>
                             </a>

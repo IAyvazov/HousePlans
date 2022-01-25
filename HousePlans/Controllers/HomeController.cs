@@ -32,6 +32,11 @@
             return View(home);
         }
 
+        public async Task<IActionResult> Price()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
